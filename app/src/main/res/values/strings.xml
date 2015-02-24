@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Taes Project</string>
+    <string name="title_activity_main">Taes Project</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_open_drawer">Abrir</string>
+    <string name="menu_close_drawer">Cerrar</string>
+
+
+</resources>
