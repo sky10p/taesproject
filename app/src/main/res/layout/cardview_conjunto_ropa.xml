@@ -22,6 +22,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/txtTituloConjunto"
-    />
+    android:text="hola"
+    android:textColor="#000000"
+    android:textSize="30dp" />
    </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -14,6 +14,7 @@ public class MainActivity extends ActionBarActivity {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawer;
+    private ConjuntosFragment conjuntosFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class MainActivity extends ActionBarActivity {
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        conjuntosFragment=new ConjuntosFragment();
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -39,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        getSupportFragmentManager().beginTransaction().add(R.id.content_frame,new ConjuntosFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.content_frame,conjuntosFragment).commit();
 
     }
 
