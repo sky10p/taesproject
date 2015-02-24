@@ -39,6 +39,8 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+        getSupportFragmentManager().beginTransaction().add(R.id.content_frame,new ConjuntosFragment()).commit();
+
     }
 
 
