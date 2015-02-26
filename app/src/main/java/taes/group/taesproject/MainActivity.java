@@ -22,6 +22,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         toolbar= (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setLogo(R.mipmap.ic_dress_your_self_circle);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         conjuntosFragment=new ConjuntosFragment();
