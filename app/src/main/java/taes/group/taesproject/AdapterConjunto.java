@@ -1,5 +1,9 @@
 package taes.group.taesproject;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,10 +47,23 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
-        holder.imagen.setImageDrawable(holder.imagen.getResources().getDrawable(conjunto.get(position).imagen));
+        BitmapDrawable drawableBitMap= (BitmapDrawable) holder.imagen.getResources().getDrawable(conjunto.get(position).imagen);
+        holder.imagen.setImageDrawable(drawableBitMap);
         holder.titulo.setText(conjunto.get(position).titulo);
+
+        AsyncTask<Bitmap, Void, Palette> palette=Palette.generateAsync(drawableBitMap.getBitmap(), new Palette.PaletteAsyncListener() {
+            @Override
+            public void onGenerated(Palette palette) {
+                Palette.Swatch swatch=palette.getVibrantSwatch();
+                if(swatch!=null){
+                    holder.titulo.setBackgroundColor(swatch.getRgb());
+                    holder.titulo.setTextColor(swatch.getTitleTextColor());
+                }
+            }
+        });
+
     }
 
     @Override
