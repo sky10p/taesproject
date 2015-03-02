@@ -1,4 +1,4 @@
-package taes.group.taesproject;
+package taes.project.dressyourself;
 
 import android.content.Context;
 import android.os.Bundle;
