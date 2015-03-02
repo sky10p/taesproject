@@ -1,4 +1,4 @@
-package taes.group.taesproject;
+package taes.project.dressyourself;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
