@@ -1,0 +1,33 @@
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+/* navbar default */
+.navbar-default {
+	background-color: #92cae5;
+	border-color: #FFF;
+	opacity: 0.80;
+    filter: alpha(opacity=80);
+    color: #FFF;
+}
+.navbar-default .navbar-brand {
+	color: #FFF;
+}
+
+.jumbotron {
+	background: url(../img/denim.jpg) center top;
+	color: #FFF;
+	opacity: 0.90;
+    filter: alpha(opacity=90);
+    height: 500px;
+}
+
+.img-center {
+	margin:0 auto;
+	width: auto;
+}
+
+footer {
+	margin-top: 50px;
+}
