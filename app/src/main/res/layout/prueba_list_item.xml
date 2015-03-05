@@ -1,0 +1,6 @@
+<TextView
+    android:layout_height="match_parent" android:layout_width="match_parent" android:textColor="#000"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:paddingLeft="@dimen/drawer_layout_margin_left"
+    android:paddingTop="@dimen/drawer_layout_margin_left"></TextView>
