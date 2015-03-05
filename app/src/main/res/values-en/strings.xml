@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Dress Yourself</string>
+    <string name="title_activity_main">Dress Yourself</string>
+
+    <string name="hello_world">Hello World!</string>
+    <string name="action_settings">Configuration</string>
+    <string name="menu_open_drawer">Open</string>
+    <string name="menu_close_drawer">Close</string>
+    <string name="contentimg">Image for clothing item</string>
+
+
+</resources>
