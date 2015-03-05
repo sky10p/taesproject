@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array
+        name="lst_left_drawer">
+        <item>Armario</item>
+        <item>Amigos</item>
+        <item>Prueba</item>
+    </string-array>
+</resources>
