@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string-array
-        name="lst_left_drawer">
+        name="lst_left_drawer_names">
         <item>Armario</item>
-        <item>Sugerencias</item>
+
         <item>Amigos</item>
         <item>divider</item>
         <item>Ajustes</item>
         <item>Ayuda</item>
     </string-array>
+
+
+    <integer-array name="lst_left_drawer_img">
+        <item>@drawable/armario</item>
+        <item>@drawable/amigos</item>
+        <item>@android:drawable/divider_horizontal_dark</item>
+        <item>@drawable/ajustes</item>
+        <item>@drawable/ayuda</item>
+    </integer-array>
 </resources>
