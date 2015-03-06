@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +18,7 @@ public class MainActivity extends ActionBarActivity {
     private Toolbar toolbar;    private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawer;
     private ConjuntosFragment conjuntosFragment;
-    private ListView listaDrawer;
+    private RecyclerView listaDrawer;
 
 
     @Override
@@ -28,9 +30,9 @@ public class MainActivity extends ActionBarActivity {
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(R.mipmap.ic_dress_your_self_circle);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        listaDrawer= (ListView) findViewById(R.id.left_drawer);
-
-        listaDrawer.setAdapter(new ArrayAdapter<String>(this,R.layout.prueba_list_item,getResources().getStringArray(R.array.lst_left_drawer)));
+        listaDrawer= (RecyclerView) findViewById(R.id.left_drawer);
+        listaDrawer.setLayoutManager(new LinearLayoutManager(this));
+        listaDrawer.setAdapter(new AdapterDrawerNavigation(this));
         conjuntosFragment=new ConjuntosFragment();
 
         setSupportActionBar(toolbar);

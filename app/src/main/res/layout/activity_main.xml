@@ -23,7 +23,7 @@
     <!-- The navigation drawer -->
 
     <LinearLayout
-        android:layout_width="240dp"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="start"
@@ -35,11 +35,13 @@
 
         <include layout="@layout/cabecera_drawer_layout"/>
 
-        <ListView android:id="@+id/left_drawer"
+        <android.support.v7.widget.RecyclerView
+            android:scrollbars="vertical"
+            android:id="@+id/left_drawer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="match_parent"/>
 
-            />
+
         </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>

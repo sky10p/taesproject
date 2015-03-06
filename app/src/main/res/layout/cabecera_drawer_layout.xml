@@ -20,6 +20,7 @@
 
         android:text="Pablo Guijarro Ramírez"
         android:id="@+id/textView"
+        android:textColor="#fff"
         android:layout_marginLeft="@dimen/drawer_layout_margin_left"
         android:layout_marginTop="@dimen/drawer_layout_margin_left"
         android:layout_marginBottom="@dimen/drawer_layout_margin_left"

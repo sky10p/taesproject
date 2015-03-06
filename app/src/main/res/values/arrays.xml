@@ -3,7 +3,10 @@
     <string-array
         name="lst_left_drawer">
         <item>Armario</item>
+        <item>Sugerencias</item>
         <item>Amigos</item>
-        <item>Prueba</item>
+        <item>divider</item>
+        <item>Ajustes</item>
+        <item>Ayuda</item>
     </string-array>
 </resources>
