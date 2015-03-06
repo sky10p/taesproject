@@ -8,12 +8,12 @@
 
     <ImageView
         android:id="@+id/imgIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_marginLeft="@dimen/drawer_layout_margin_left"
         android:layout_marginRight="32dp"
 
-        android:src="@android:drawable/ic_menu_rotate"/>
+        android:src="@android:drawable/ic_menu_preferences"/>
 
     <TextView
         android:id="@+id/txtTextMenu"

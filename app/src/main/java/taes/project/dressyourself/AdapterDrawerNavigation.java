@@ -2,6 +2,7 @@ package taes.project.dressyourself;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,12 +18,15 @@ import android.widget.TextView;
 public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerNavigation.ViewHolder> {
 
     String[] listMenu;
+    TypedArray iconsMenu;
 
     Context context;
 
     public AdapterDrawerNavigation(Context context) {
         this.context=context;
-        this.listMenu = context.getResources().getStringArray(R.array.lst_left_drawer);
+        this.listMenu = context.getResources().getStringArray(R.array.lst_left_drawer_names);
+        iconsMenu=context.getResources().obtainTypedArray(R.array.lst_left_drawer_img);
+
     }
 
     @Override
@@ -61,6 +65,8 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
 
         if(getItemViewType(position)==0){
             holder.texto.setText(listMenu[position]);
+
+            holder.imagen.setImageResource(iconsMenu.getResourceId(position,android.R.drawable.ic_menu_preferences));
         }
 
 
