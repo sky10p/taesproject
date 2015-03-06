@@ -12,6 +12,9 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -25,7 +28,13 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        // Enable Local Datastore.
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "s90VyHtWPNx9cgndGgresmqQxjT1drJRcRNwBFzX", "WJRi26caKuA8QAmDiy9Xm1eB79fE950wMM2hHDCc");
+        // Ejemplo de insercción con parse
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();
 
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(R.mipmap.ic_dress_your_self_circle);
