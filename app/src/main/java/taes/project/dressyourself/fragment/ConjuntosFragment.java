@@ -1,4 +1,4 @@
-package taes.project.dressyourself;
+package taes.project.dressyourself.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import taes.project.dressyourself.R;
+import taes.project.dressyourself.adapter.AdapterConjunto;
 
 /**
  * Created by pablo on 24/02/15.

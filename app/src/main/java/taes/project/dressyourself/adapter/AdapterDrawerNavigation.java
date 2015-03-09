@@ -1,6 +1,5 @@
-package taes.project.dressyourself;
+package taes.project.dressyourself.adapter;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -11,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import taes.project.dressyourself.R;
 
 /**
  * Created by pablo on 6/03/15.

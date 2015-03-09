@@ -1,4 +1,4 @@
-package taes.project.dressyourself;
+package taes.project.dressyourself.adapter;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import taes.project.dressyourself.R;
 
 /**
  * Created by pablo on 24/02/15.
@@ -33,7 +35,7 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
 
     public AdapterConjunto(){
         conjunto = new ArrayList<>();
-        conjunto.add(new ConjuntoRopa("conjunto1",R.drawable.conjunto1));
+        conjunto.add(new ConjuntoRopa("conjunto1", R.drawable.conjunto1));
         conjunto.add(new ConjuntoRopa("conjunto2",R.drawable.conjunto2));
         conjunto.add(new ConjuntoRopa("conjunto3",R.drawable.conjunto3));
     }

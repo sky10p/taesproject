@@ -7,6 +7,16 @@
     <string name="menu_open_drawer">Abrir</string>
     <string name="menu_close_drawer">Cerrar</string>
     <string name="contentimg">imagen conjunto de ropa</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="register">Registrar</string>
+    <string name="login">Login</string>
+    <string name="userName">Nombre de Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="fullName">Nombre Completo</string>
+    <string name="newButton">Nuevo Boton</string>
+    <string name="start_session">Iniciar Sesión</string>
+    <string name="complete_register">Completar Registro</string>
+    <string name="splash_description">Vistete como tu quieras</string>
 
 
 </resources>

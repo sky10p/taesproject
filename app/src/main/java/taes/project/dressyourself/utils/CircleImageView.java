@@ -1,4 +1,4 @@
-package taes.project.dressyourself;
+package taes.project.dressyourself.utils;
 
 import android.annotation.TargetApi;
 import android.content.Context;
