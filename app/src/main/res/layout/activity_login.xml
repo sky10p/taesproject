@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     tools:context="es.apps.sky.youandme.LoginActivity"
     android:transitionName="layoutSplash" android:id="@+id/layout_splash"
-    android:background="@color/blueDrawer"
+    android:background="@color/blue900"
     android:animateLayoutChanges="true"
     android:orientation="vertical">
 
