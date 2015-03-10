@@ -4,7 +4,6 @@
     <string-array
         name="lst_left_drawer_names">
         <item>Armario</item>
-
         <item>Amigos</item>
         <item>divider</item>
         <item>Ajustes</item>

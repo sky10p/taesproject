@@ -35,7 +35,7 @@ public class LoginFragment extends Fragment {
         View v;
         v=inflater.inflate(R.layout.fragment_login,container,false);
 
-        loginButton = (Button) v.findViewById(R.id.btnComplete);
+        loginButton = (Button) v.findViewById(R.id.loginbtn);
 
         // obtener campos desde el layout para el login
         usernameText = (EditText) v.findViewById(R.id.txtUserName);

@@ -10,7 +10,12 @@
         android:id="@+id/txtUserName"
         android:inputType="text"
         android:hint="@string/userName"/>
-
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtEmail"
+        android:inputType="textEmailAddress"
+        android:hint="@string/email"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,12 +23,11 @@
         android:ems="10"
         android:hint="@string/password"
         android:id="@+id/txtPassword" />
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:id="@+id/loginbtn" />
+        android:text="@string/signup"
+        android:id="@+id/signupbtn" />
 
 
 </LinearLayout>

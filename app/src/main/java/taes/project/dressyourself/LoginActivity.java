@@ -16,6 +16,7 @@ import android.widget.TextView;
 import taes.project.dressyourself.animation.LayoutAnimation;
 import taes.project.dressyourself.animation.VisibilityAnimationListener;
 import taes.project.dressyourself.fragment.LoginFragment;
+import taes.project.dressyourself.fragment.SignupFragment;
 
 
 public class LoginActivity extends ActionBarActivity {
@@ -27,7 +28,6 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         super.onCreate(savedInstanceState);
-
 
         setContentView(R.layout.activity_login);
 
@@ -81,15 +81,15 @@ public class LoginActivity extends ActionBarActivity {
         tabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
         Bundle registrar=new Bundle();
 
-        registrar.putString("type", getString(R.string.register));
+        registrar.putString("type", getString(R.string.signup));
 
         Bundle login=new Bundle();
         login.putString("type",getString(R.string.login));
 
         tabHost.addTab(tabHost.newTabSpec(getString(R.string.login))
                 .setIndicator(getString(R.string.login)),LoginFragment.class,login);
-        tabHost.addTab(tabHost.newTabSpec(getString(R.string.register))
-                .setIndicator(getString(R.string.register)), LoginFragment.class,registrar);
+        tabHost.addTab(tabHost.newTabSpec(getString(R.string.signup))
+                .setIndicator(getString(R.string.signup)), SignupFragment.class,registrar);
 
     }
 
