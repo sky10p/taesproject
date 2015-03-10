@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import taes.project.dressyourself.animation.LayoutAnimation;
 import taes.project.dressyourself.animation.VisibilityAnimationListener;
 import taes.project.dressyourself.fragment.LoginFragment;
@@ -39,14 +40,6 @@ public class LoginActivity extends ActionBarActivity {
         configureTabHost();
 
         configureAnimation();
-
-
-
-
-
-
-
-
 
     }
 
