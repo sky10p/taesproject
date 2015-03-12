@@ -32,6 +32,14 @@
             android:name=".PublicacionActivity"
             android:label="@string/title_activity_publicacion" >
         </activity>
+        <activity
+            android:name=".ArmarioActivity"
+            android:label="@string/title_activity_armario"
+            android:parentActivityName=".DressYourSelfActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="taes.project.dressyourself.DressYourSelfActivity" />
+        </activity>
     </application>
 
 </manifest>

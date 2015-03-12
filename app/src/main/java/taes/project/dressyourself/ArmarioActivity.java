@@ -4,21 +4,30 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.support.v7.widget.RecyclerView;
+import android.content.Context;
+
+import taes.project.dressyourself.adapter.AdapterCategoria;
+import taes.project.dressyourself.fragment.CategoriasFragment;
 
 
-public class PublicacionActivity extends ActionBarActivity {
+public class ArmarioActivity extends ActionBarActivity {
+
+    private CategoriasFragment categoriasFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_publicacion);
+        setContentView(R.layout.activity_armario);
+        categoriasFragment  = new CategoriasFragment();
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //FALTA!! getMenuInflater().inflate(R.menu.menu_publicacion, menu);
+        getMenuInflater().inflate(R.menu.menu_armario, menu);
         return true;
     }
 

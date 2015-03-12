@@ -1,6 +1,7 @@
 package taes.project.dressyourself;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -81,5 +82,11 @@ public class DressYourSelfActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void irArmario(View view) {
+        Intent intent = new Intent(this, ArmarioActivity.class);
+        startActivity(intent);
     }
 }
