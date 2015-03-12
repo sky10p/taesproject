@@ -18,7 +18,7 @@ public class PublicacionActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_publicacion, menu);
+        //FALTA!! getMenuInflater().inflate(R.menu.menu_publicacion, menu);
         return true;
     }
 
