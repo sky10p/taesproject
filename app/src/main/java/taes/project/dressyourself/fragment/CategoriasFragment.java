@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,8 +27,8 @@ public class CategoriasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.list_categorias,container,false);
-        listaCategorias= (RecyclerView) v.findViewById(R.id.lstConjuntos);
-        manager=new LinearLayoutManager(getActivity());
+        listaCategorias= (RecyclerView) v.findViewById(R.id.listaCategorias);
+        manager=new GridLayoutManager(getActivity(),2);
         listaCategorias.setLayoutManager(manager);
         adapter=new AdapterCategoria();
         listaCategorias.setAdapter(adapter);

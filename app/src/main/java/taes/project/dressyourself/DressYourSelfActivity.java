@@ -1,8 +1,8 @@
 package taes.project.dressyourself;
 
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,13 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-
-
-import com.parse.ParseUser;
 
 import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
+import taes.project.dressyourself.fragment.CategoriasFragment;
 import taes.project.dressyourself.fragment.ConjuntosFragment;
 
 
@@ -28,6 +24,18 @@ public class DressYourSelfActivity extends ActionBarActivity {
     private ActionBarDrawerToggle actionBarDrawer;
     private ConjuntosFragment conjuntosFragment;
     private RecyclerView listaDrawer;
+
+
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().getBackStackEntryCount()!=0){
+            getSupportFragmentManager().popBackStackImmediate();
+
+        }else
+        {
+            super.onBackPressed();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +48,16 @@ public class DressYourSelfActivity extends ActionBarActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         listaDrawer= (RecyclerView) findViewById(R.id.left_drawer);
         listaDrawer.setLayoutManager(new LinearLayoutManager(this));
-        listaDrawer.setAdapter(new AdapterDrawerNavigation(this));
+        AdapterDrawerNavigation adapter=new AdapterDrawerNavigation(this);
+        adapter.setListenerCargarCategoria(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new CategoriasFragment()).addToBackStack(null).commit();
 
+                drawerLayout.closeDrawers();
+            }
+        });
+        listaDrawer.setAdapter(adapter);
         conjuntosFragment=new ConjuntosFragment();
 
         setSupportActionBar(toolbar);
@@ -85,8 +101,5 @@ public class DressYourSelfActivity extends ActionBarActivity {
     }
 
 
-    public void irArmario(View view) {
-        Intent intent = new Intent(this, ArmarioActivity.class);
-        startActivity(intent);
-    }
+
 }

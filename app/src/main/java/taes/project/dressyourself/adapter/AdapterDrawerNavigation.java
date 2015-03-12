@@ -1,9 +1,12 @@
 package taes.project.dressyourself.adapter;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,7 @@ import com.parse.ParseUser;
 import taes.project.dressyourself.LoginActivity;
 import taes.project.dressyourself.MainActivity;
 import taes.project.dressyourself.R;
+import taes.project.dressyourself.fragment.CategoriasFragment;
 
 /**
  * Created by pablo on 6/03/15.
@@ -27,13 +31,24 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
     TypedArray iconsMenu;
 
     Context context;
+    private View.OnClickListener listenerCargarCategoria;
+
 
     public AdapterDrawerNavigation(Context context) {
         this.context=context;
         this.listMenu = context.getResources().getStringArray(R.array.lst_left_drawer_names);
         iconsMenu=context.getResources().obtainTypedArray(R.array.lst_left_drawer_img);
+      ;
+
+
 
     }
+
+    public void setListenerCargarCategoria(View.OnClickListener listener){
+        listenerCargarCategoria=listener;
+    }
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -73,6 +88,9 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
             holder.texto.setText(listMenu[position]);
 
             holder.imagen.setImageResource(iconsMenu.getResourceId(position,android.R.drawable.ic_menu_preferences));
+            if(position==0){
+                holder.itemView.setOnClickListener(listenerCargarCategoria);
+            }
         }
 
 
@@ -86,21 +104,13 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imagen;
         public TextView texto;
+        public View itemView;
         private final Context context;
+
         public ViewHolder(View itemView,boolean divider) {
             super(itemView);
+            this.itemView=itemView;
             context = itemView.getContext();
-            itemView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view)
-                {
-                    if(getPosition() == 5){
-                        ParseUser.logOut();
-                        Intent intent = new Intent(context,MainActivity.class);
-                        context.startActivity(intent);
-                    }
-                }
-            });
             if(divider==false){
                 imagen= (ImageView) itemView.findViewById(R.id.imgIcon);
                 texto= (TextView) itemView.findViewById(R.id.txtTextMenu);
