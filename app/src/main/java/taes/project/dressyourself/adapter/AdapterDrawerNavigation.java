@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -31,7 +32,7 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
     TypedArray iconsMenu;
 
     Context context;
-    private View.OnClickListener listenerCargarCategoria;
+    private View.OnTouchListener listenerCargarCategoria;
 
 
     public AdapterDrawerNavigation(Context context) {
@@ -44,7 +45,7 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
 
     }
 
-    public void setListenerCargarCategoria(View.OnClickListener listener){
+    public void setListenerCargarCategoria(View.OnTouchListener listener){
         listenerCargarCategoria=listener;
     }
 
@@ -71,6 +72,8 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
         return vh;
     }
 
+
+
     @Override
     public int getItemViewType(int position) {
         if(listMenu[position].equals("divider")){
@@ -89,7 +92,7 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
 
             holder.imagen.setImageResource(iconsMenu.getResourceId(position,android.R.drawable.ic_menu_preferences));
             if(position==0){
-                holder.itemView.setOnClickListener(listenerCargarCategoria);
+                holder.itemView.setOnTouchListener(listenerCargarCategoria);
             }
         }
 
@@ -111,9 +114,15 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
             super(itemView);
             this.itemView=itemView;
             context = itemView.getContext();
+
+
+
+
+
             if(divider==false){
                 imagen= (ImageView) itemView.findViewById(R.id.imgIcon);
                 texto= (TextView) itemView.findViewById(R.id.txtTextMenu);
+
             }
         }
     }
