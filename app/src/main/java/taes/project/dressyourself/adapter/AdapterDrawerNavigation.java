@@ -1,6 +1,7 @@
 package taes.project.dressyourself.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.parse.ParseUser;
+
+import taes.project.dressyourself.LoginActivity;
+import taes.project.dressyourself.MainActivity;
 import taes.project.dressyourself.R;
 
 /**
@@ -81,16 +86,25 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imagen;
         public TextView texto;
-
+        private final Context context;
         public ViewHolder(View itemView,boolean divider) {
             super(itemView);
+            context = itemView.getContext();
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view)
+                {
+                    if(getPosition() == 5){
+                        ParseUser.logOut();
+                        Intent intent = new Intent(context,MainActivity.class);
+                        context.startActivity(intent);
+                    }
+                }
+            });
             if(divider==false){
                 imagen= (ImageView) itemView.findViewById(R.id.imgIcon);
                 texto= (TextView) itemView.findViewById(R.id.txtTextMenu);
             }
-
-
-
         }
     }
 }

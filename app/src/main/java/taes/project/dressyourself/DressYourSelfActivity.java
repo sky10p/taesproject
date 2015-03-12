@@ -1,5 +1,6 @@
 package taes.project.dressyourself;
 
+
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+
+import com.parse.ParseUser;
 
 import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
 import taes.project.dressyourself.fragment.ConjuntosFragment;
@@ -20,7 +27,6 @@ public class DressYourSelfActivity extends ActionBarActivity {
     private ActionBarDrawerToggle actionBarDrawer;
     private ConjuntosFragment conjuntosFragment;
     private RecyclerView listaDrawer;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,7 @@ public class DressYourSelfActivity extends ActionBarActivity {
         listaDrawer= (RecyclerView) findViewById(R.id.left_drawer);
         listaDrawer.setLayoutManager(new LinearLayoutManager(this));
         listaDrawer.setAdapter(new AdapterDrawerNavigation(this));
+
         conjuntosFragment=new ConjuntosFragment();
 
         setSupportActionBar(toolbar);
@@ -52,9 +59,7 @@ public class DressYourSelfActivity extends ActionBarActivity {
         });
 
         getSupportFragmentManager().beginTransaction().add(R.id.content_frame,conjuntosFragment).commit();
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
