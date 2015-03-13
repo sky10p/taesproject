@@ -1,6 +1,7 @@
 package taes.project.dressyourself;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -11,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 
 import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
@@ -49,14 +51,32 @@ public class DressYourSelfActivity extends ActionBarActivity {
         listaDrawer= (RecyclerView) findViewById(R.id.left_drawer);
         listaDrawer.setLayoutManager(new LinearLayoutManager(this));
         AdapterDrawerNavigation adapter=new AdapterDrawerNavigation(this);
-        adapter.setListenerCargarCategoria(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new CategoriasFragment()).addToBackStack(null).commit();
 
-                drawerLayout.closeDrawers();
+
+       
+        adapter.setListenerCargarCategoria(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        v.setBackgroundColor(Color.GRAY);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        v.setBackgroundColor(Color.TRANSPARENT);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new CategoriasFragment()).addToBackStack(null).commit();
+
+                        drawerLayout.closeDrawers();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        v.setBackgroundColor(Color.GRAY);
+                        break;
+                    default:
+                        v.setBackgroundColor(Color.TRANSPARENT);
+                }
+                return true;
             }
         });
+
         listaDrawer.setAdapter(adapter);
         conjuntosFragment=new ConjuntosFragment();
 
