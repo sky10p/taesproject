@@ -18,7 +18,46 @@
             android:layout_height="match_parent" />
 
     </LinearLayout>
-    <!-- The main content view -->
+    <!--Estos son los  botones de agregar foto y voto-->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/multiple_actions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            fab:fab_addButtonPlusIconColor="@color/white"
+            fab:fab_addButtonColorNormal="@color/blue_semi_transparent"
+            fab:fab_addButtonColorPressed="@color/blue_semi_transparent_pressed"
+            fab:fab_labelStyle="@style/menu_labels_style"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp">
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/action_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_icon="@drawable/ic_action_photo"
+                fab:fab_colorNormal="@color/colorPrimary"
+                fab:fab_colorPressed="@color/blue_semi_transparent_pressed"/>
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/action_vote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_icon="@drawable/ic_action_vote"
+                fab:fab_colorNormal="@color/colorPrimary"
+                fab:fab_colorPressed="@color/blue_semi_transparent_pressed"/>
+
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+    </RelativeLayout>
 
     <!-- The navigation drawer -->
 
@@ -46,5 +85,8 @@
 
 
         </LinearLayout>
+    
+    
+
 
 </android.support.v4.widget.DrawerLayout>
