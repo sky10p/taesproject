@@ -1,6 +1,7 @@
 package taes.project.dressyourself;
 
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,14 +15,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
+import taes.project.dressyourself.activities.FloatingButtonActivity;
 import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
 import taes.project.dressyourself.fragment.CategoriasFragment;
 import taes.project.dressyourself.fragment.ConjuntosFragment;
+import taes.project.dressyourself.fragment.FloatingButtonFragment;
 
 
-public class DressYourSelfActivity extends ActionBarActivity {
+public class DressYourSelfActivity extends FloatingButtonActivity {
 
     private Toolbar toolbar;   
     private DrawerLayout drawerLayout;
@@ -31,27 +37,20 @@ public class DressYourSelfActivity extends ActionBarActivity {
 
 
 
-    @Override
-    public void onBackPressed() {
-        if(getSupportFragmentManager().getBackStackEntryCount()!=0){
-            getSupportFragmentManager().popBackStackImmediate();
 
-        }else
-        {
-            super.onBackPressed();
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dress_yourself_activity);        
 
+
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(R.mipmap.ic_dress_your_self_circle);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         listaDrawer= (RecyclerView) findViewById(R.id.left_drawer);
         listaDrawer.setLayoutManager(new LinearLayoutManager(this));
+        floatingButton= (FloatingButtonFragment) getSupportFragmentManager().findFragmentById(R.id.floatingButtonFragment);
         AdapterDrawerNavigation adapter=new AdapterDrawerNavigation(this);
 
 
