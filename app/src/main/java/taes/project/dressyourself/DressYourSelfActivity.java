@@ -1,9 +1,10 @@
 package taes.project.dressyourself;
 
 
+import android.app.FragmentManager;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,35 +15,34 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
+import taes.project.dressyourself.activities.FloatingButtonActivity;
 import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
 import taes.project.dressyourself.fragment.CategoriasFragment;
 import taes.project.dressyourself.fragment.ConjuntosFragment;
+import taes.project.dressyourself.fragment.FloatingButtonFragment;
 
 
-public class DressYourSelfActivity extends ActionBarActivity {
+public class DressYourSelfActivity extends FloatingButtonActivity {
 
-    private Toolbar toolbar;    private DrawerLayout drawerLayout;
+    private Toolbar toolbar;   
+    private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawer;
     private ConjuntosFragment conjuntosFragment;
     private RecyclerView listaDrawer;
 
 
-    @Override
-    public void onBackPressed() {
-        if(getSupportFragmentManager().getBackStackEntryCount()!=0){
-            getSupportFragmentManager().popBackStackImmediate();
 
-        }else
-        {
-            super.onBackPressed();
-        }
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dress_yourself_activity);
+        setContentView(R.layout.dress_yourself_activity);        
 
 
         toolbar= (Toolbar) findViewById(R.id.toolbar);
@@ -50,6 +50,7 @@ public class DressYourSelfActivity extends ActionBarActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         listaDrawer= (RecyclerView) findViewById(R.id.left_drawer);
         listaDrawer.setLayoutManager(new LinearLayoutManager(this));
+        floatingButton= (FloatingButtonFragment) getSupportFragmentManager().findFragmentById(R.id.floatingButtonFragment);
         AdapterDrawerNavigation adapter=new AdapterDrawerNavigation(this);
 
 
@@ -96,6 +97,8 @@ public class DressYourSelfActivity extends ActionBarActivity {
         });
 
         getSupportFragmentManager().beginTransaction().add(R.id.content_frame,conjuntosFragment).commit();
+
+        onClickPhotoAndVoteButton();
     }
 
     @Override
@@ -119,7 +122,40 @@ public class DressYourSelfActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    
+    public void onClickPhotoAndVoteButton() {
+        onClickPhotoButton();
+        onClickVoteButton();
+    }
+
+   
+    // Al hacer click en icono de foto
+    public void onClickPhotoButton() {        
+            
+        findViewById(R.id.action_photo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DressYourSelfActivity.this, CameraActivity.class);
+                startActivity(intent);
+            }
+        });  
+       
+    }
 
 
 
+
+
+    public void onClickVoteButton() {
+
+        findViewById(R.id.action_vote).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DressYourSelfActivity.this, "Clicked Vote Button", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+    
+    
 }
