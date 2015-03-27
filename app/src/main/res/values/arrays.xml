@@ -3,12 +3,12 @@
 
     <string-array
         name="lst_left_drawer_names">
-        <item>Armario</item>
-        <item>Amigos</item>
-        <item>divider</item>
-        <item>Ajustes</item>
-        <item>Ayuda</item>
-        <item>Cerrar Sesión</item>
+        <item>@string/armario</item>
+        <item>@string/amigos</item>
+        <item>@string/divider</item>
+        <item>@string/ajustes</item>
+        <item>@string/ayuda</item>
+        <item>@string/sign_out</item>
     </string-array>
 
 
@@ -20,4 +20,10 @@
         <item>@drawable/ayuda</item>
         <item>@drawable/sign_out</item>
     </integer-array>
+    <string name="armario">Armario</string>
+    <string name="amigos">Amigos</string>
+    <string name="divider">divider</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="ayuda">Ayuda</string>
+    <string name="sign_out">Cerrar Sesión</string>
 </resources>

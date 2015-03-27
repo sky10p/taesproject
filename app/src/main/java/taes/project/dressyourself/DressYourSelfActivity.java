@@ -19,12 +19,14 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.parse.ParseUser;
 
 import taes.project.dressyourself.activities.FloatingButtonActivity;
 import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
 import taes.project.dressyourself.fragment.CategoriasFragment;
 import taes.project.dressyourself.fragment.ConjuntosFragment;
 import taes.project.dressyourself.fragment.FloatingButtonFragment;
+import taes.project.dressyourself.interfaces.OnDrawerLayoutMenuListener;
 
 
 public class DressYourSelfActivity extends FloatingButtonActivity {
@@ -55,26 +57,35 @@ public class DressYourSelfActivity extends FloatingButtonActivity {
 
 
        
-        adapter.setListenerCargarCategoria(new View.OnTouchListener() {
+        adapter.setOnDrawerLayoutMenuListener(new OnDrawerLayoutMenuListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        v.setBackgroundColor(Color.GRAY);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        v.setBackgroundColor(Color.TRANSPARENT);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new CategoriasFragment()).addToBackStack(null).commit();
+            public void onClicArmario() {
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new CategoriasFragment()).addToBackStack(null).commit();
 
-                        drawerLayout.closeDrawers();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        v.setBackgroundColor(Color.GRAY);
-                        break;
-                    default:
-                        v.setBackgroundColor(Color.TRANSPARENT);
-                }
-                return true;
+                drawerLayout.closeDrawers();
+            }
+
+            @Override
+            public void onClicAmigos() {
+
+            }
+
+            @Override
+            public void onClicAjustes() {
+
+            }
+
+            @Override
+            public void onClicAyuda() {
+
+            }
+
+            @Override
+            public void onClicCerrarSesion() {
+                ParseUser.logOut();
+                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
