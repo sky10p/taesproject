@@ -16,7 +16,10 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.parse.ParseUser;
+
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +31,8 @@ public class CameraActivity extends ActionBarActivity {
     static final int REQUEST_IMAGE_CAPTURE = 0;
     //Camino en el cual esta guardada la foto
     private String mCurrentPhotoPath;
+    
+    private String RESIZE = "resize";
 
 
 
@@ -62,12 +67,12 @@ public class CameraActivity extends ActionBarActivity {
     }
 
 
-    //Crea una imagen unica en memoria y la devuelve
+    //Crea una imagen unica en memoria destino  y la devuelve
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES +"/"+ParseUser.getCurrentUser().getUsername());
         if (!storageDir.exists()) {
             storageDir.mkdir();
         }
@@ -129,7 +134,7 @@ public class CameraActivity extends ActionBarActivity {
     public void setPic() {
         
         ImageView imageView = (ImageView) findViewById(R.id.imageView1);        
-        Bitmap bMap = decodeSampledBitmapFromMemory(1024, 1024);
+        Bitmap bMap = getBitmap();
         imageView.setImageBitmap(bMap);
     }
 
@@ -140,8 +145,102 @@ public class CameraActivity extends ActionBarActivity {
             this.finish();
         }
     }
+  
+    public Bitmap getBitmap() {
 
-    public static int calculateInSampleSize(
+        try {
+            final int IMAGE_MAX_SIZE = 1200000; // 1.2MP
+
+            // Decode image size
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(mCurrentPhotoPath, o);
+
+            int scale = 1;
+            while ((o.outWidth * o.outHeight) * (1 / Math.pow(scale, 2)) >
+                    IMAGE_MAX_SIZE) {
+                scale++;
+            }
+            Log.d(RESIZE, "scale = " + scale + ", orig-width: " + o.outWidth + ",orig-height: " + o.outHeight);
+
+            Bitmap b = null;
+            if (scale > 1) {
+                scale--;
+                // scale to max possible inSampleSize that still yields an image
+                // larger than target
+                o = new BitmapFactory.Options();
+                o.inSampleSize = scale;
+                b = BitmapFactory.decodeFile(mCurrentPhotoPath, o);
+
+                // resize to desired dimensions
+                int height = b.getHeight();
+                int width = b.getWidth();
+                Log.d(RESIZE, "1th scale operation dimenions - width: " + width + ",height: " + height);
+
+                double y = Math.sqrt(IMAGE_MAX_SIZE
+                        / (((double) width) / height));
+                double x = (y / height) * width;
+
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(b, (int) x,
+                        (int) y, true);
+                b.recycle();
+                b = scaledBitmap;
+
+                System.gc();
+            } else {
+                b = BitmapFactory.decodeFile(mCurrentPhotoPath);
+            }
+
+
+            Log.d(RESIZE, "bitmap size - width: " +b.getWidth() + ", height: " +
+                    b.getHeight());
+            saveBitmap(b);
+            return b;
+        } catch (Exception e) {
+            Log.e(RESIZE, e.getMessage(),e);
+            return null;
+        }
+    
+    }
+    
+    public void saveBitmap(Bitmap bit){
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(mCurrentPhotoPath);
+            bit.compress(Bitmap.CompressFormat.JPEG, 80, out); // bmp is your Bitmap instance
+            // PNG is a lossless format, the compression factor (100) is ignored
+        } catch (Exception e) {
+            Log.d(RESIZE, e.getMessage());
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                Log.d(RESIZE, e.getMessage());
+            }
+        }
+    }
+/*
+    public Bitmap decodeSampledBitmapFromMemory(int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        
+        
+        BitmapFactory.decodeFile(mCurrentPhotoPath);
+            // Calculate inSampleSize
+            options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+            // Decode bitmap with inSampleSize set
+            options.inJustDecodeBounds = false;
+            return BitmapFactory.decodeFile(mCurrentPhotoPath);
+
+       
+    }
+    
+      public static int calculateInSampleSize(
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
         final int height = options.outHeight;
@@ -164,23 +263,5 @@ public class CameraActivity extends ActionBarActivity {
         return inSampleSize;
     }
 
-    public Bitmap decodeSampledBitmapFromMemory(int reqWidth, int reqHeight) {
-
-        // First decode with inJustDecodeBounds=true to check dimensions
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        
-        
-        BitmapFactory.decodeFile(mCurrentPhotoPath);
-            // Calculate inSampleSize
-            options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-
-            // Decode bitmap with inSampleSize set
-            options.inJustDecodeBounds = false;
-            return BitmapFactory.decodeFile(mCurrentPhotoPath);
-
-       
-    }
-
-
+*/
 }
