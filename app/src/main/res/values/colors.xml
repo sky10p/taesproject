@@ -15,4 +15,5 @@
     <color name="blue_semi">#7980AD</color>
     <color name="blue_semi_transparent">#805677fc</color>
     <color name="blue_semi_transparent_pressed">#80738ffe</color>
+    <color name="gray_selected_menu">#EEEEEE</color>
 </resources>
