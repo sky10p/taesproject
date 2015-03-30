@@ -1,9 +1,9 @@
 package taes.project.dressyourself;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,22 +11,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.parse.ParseUser;
 
 import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
 import taes.project.dressyourself.fragment.CategoriasFragment;
 import taes.project.dressyourself.fragment.ConjuntosFragment;
 
-
 public class DressYourSelfActivity extends ActionBarActivity {
 
-    private Toolbar toolbar;    private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawer;
     private ConjuntosFragment conjuntosFragment;
     private RecyclerView listaDrawer;
-
 
     @Override
     public void onBackPressed() {
@@ -42,10 +44,10 @@ public class DressYourSelfActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dress_yourself_activity);
+        setContentView(R.layout.activity_dressyourself);
 
 
-        toolbar= (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(R.mipmap.ic_dress_your_self_circle);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         listaDrawer= (RecyclerView) findViewById(R.id.left_drawer);
@@ -53,30 +55,8 @@ public class DressYourSelfActivity extends ActionBarActivity {
         AdapterDrawerNavigation adapter=new AdapterDrawerNavigation(this);
 
 
-       
-        adapter.setListenerCargarCategoria(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        v.setBackgroundColor(Color.GRAY);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        v.setBackgroundColor(Color.TRANSPARENT);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new CategoriasFragment()).addToBackStack(null).commit();
-
-                        drawerLayout.closeDrawers();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        v.setBackgroundColor(Color.GRAY);
-                        break;
-                    default:
-                        v.setBackgroundColor(Color.TRANSPARENT);
-                }
-                return true;
-            }
-        });
-
+        adapter.setListenerCargarCategoria(cargarCategoriasListener);
+        adapter.setListenerLogout(logoutListener);
         listaDrawer.setAdapter(adapter);
         conjuntosFragment=new ConjuntosFragment();
 
@@ -101,7 +81,8 @@ public class DressYourSelfActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.searchview, menu);
         return true;
     }
 
@@ -120,6 +101,53 @@ public class DressYourSelfActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    final View.OnTouchListener cargarCategoriasListener = new View.OnTouchListener()
+    {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch (event.getAction()){
+                case MotionEvent.ACTION_DOWN:
+                    v.setBackgroundColor(Color.LTGRAY);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    v.setBackgroundColor(Color.TRANSPARENT);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new CategoriasFragment()).addToBackStack(null).commit();
+                    drawerLayout.closeDrawers();
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    v.setBackgroundColor(Color.LTGRAY);
+                    break;
+                default:
+                    v.setBackgroundColor(Color.TRANSPARENT);
+            }
+            return true;
+        }
+    };
 
-
+   final View.OnTouchListener logoutListener = new View.OnTouchListener()
+   {
+       @Override
+       public boolean onTouch(View v, MotionEvent event)
+       {
+           switch(event.getAction())
+           {
+               case MotionEvent.ACTION_DOWN:
+                   v.setBackgroundColor(Color.LTGRAY);
+                   break;
+               case MotionEvent.ACTION_UP:
+                   v.setBackgroundColor(Color.TRANSPARENT);
+                   ParseUser.logOut();
+                   Intent intent = new Intent(DressYourSelfActivity.this,LoginActivity.class);
+                   startActivity(intent);
+                   finish();
+                   break;
+               case MotionEvent.ACTION_MOVE:
+                   v.setBackgroundColor(Color.LTGRAY);
+                   break;
+               default:
+                   v.setBackgroundColor(Color.TRANSPARENT);
+           }
+           return true;
+       }
+   };
 }

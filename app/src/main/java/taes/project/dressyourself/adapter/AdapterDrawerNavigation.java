@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.parse.ParseUser;
 
+import taes.project.dressyourself.DressYourSelfActivity;
 import taes.project.dressyourself.LoginActivity;
 import taes.project.dressyourself.MainActivity;
 import taes.project.dressyourself.R;
@@ -33,7 +34,7 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
 
     Context context;
     private View.OnTouchListener listenerCargarCategoria;
-
+    private View.OnTouchListener logoutListener;
 
     public AdapterDrawerNavigation(Context context) {
         this.context=context;
@@ -48,8 +49,10 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
     public void setListenerCargarCategoria(View.OnTouchListener listener){
         listenerCargarCategoria=listener;
     }
-
-
+    public void setListenerLogout(View.OnTouchListener listener)
+    {
+        logoutListener = listener;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -91,9 +94,15 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
             holder.texto.setText(listMenu[position]);
 
             holder.imagen.setImageResource(iconsMenu.getResourceId(position,android.R.drawable.ic_menu_preferences));
-            if(position==0){
-                holder.itemView.setOnTouchListener(listenerCargarCategoria);
+            switch(position)
+            {
+                case 0:
+                    holder.itemView.setOnTouchListener(listenerCargarCategoria);
+                    break;
+                case 5:
+                    holder.itemView.setOnTouchListener(logoutListener);
             }
+
         }
 
 

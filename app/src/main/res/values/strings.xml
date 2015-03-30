@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Dress Yourself</string>
+    <string name="app_name">DressYourself!</string>
     <string name="title_activity_main">DressYourself!</string>
     <string name="action_settings">Configuración</string>
     <string name="menu_open_drawer">Abrir</string>
     <string name="menu_close_drawer">Cerrar</string>
     <string name="contentimg">imagen conjunto de ropa</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="signup">Registrar</string>
-    <string name="userName">Nombre de Usuario</string>
+    <string name="signup">Regístrate</string>
+    <string name="userName">Usuario</string>
     <string name="password">Contraseña</string>
     <string name="email">Correo electrónico</string>
     <string name="fullName">Nombre Completo</string>
