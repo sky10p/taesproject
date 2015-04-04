@@ -1,4 +1,4 @@
-package taes.project.dressyourself.fragment;
+package taes.project.dressyourself.fragments;
 
 
 import android.content.Intent;
@@ -68,23 +68,6 @@ public class LoginFragment extends Fragment {
                 });
             }
         });
-
-        /*
-        Bundle bundle=getArguments();
-        if(bundle.getString("type").equals(getString(R.string.login))){
-
-            btnComplete.setText(getString(R.string.start_session));
-            btnComplete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(getActivity(), DressYourSelfActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                }
-            });
-        }else{
-            btnComplete.setText(getString(R.string.complete_register));
-        }*/
         return v;
     }
 }

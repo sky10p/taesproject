@@ -1,15 +1,10 @@
 package taes.project.dressyourself;
 
 
-<<<<<<< HEAD
-=======
-import android.app.FragmentManager;
->>>>>>> develop
+
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,60 +12,42 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
-<<<<<<< HEAD
-import com.parse.ParseUser;
 
-=======
-import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.parse.ParseUser;
 
 import taes.project.dressyourself.activities.FloatingButtonActivity;
->>>>>>> develop
 import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
-import taes.project.dressyourself.fragment.CategoriasFragment;
-import taes.project.dressyourself.fragment.ConjuntosFragment;
-import taes.project.dressyourself.fragment.FloatingButtonFragment;
+import taes.project.dressyourself.fragments.CategoriasFragment;
+import taes.project.dressyourself.fragments.ConjuntosFragment;
+import taes.project.dressyourself.fragments.FloatingButtonFragment;
 import taes.project.dressyourself.interfaces.OnDrawerLayoutMenuListener;
 
-<<<<<<< HEAD
-public class DressYourSelfActivity extends ActionBarActivity {
-
-    private Toolbar toolbar;
-=======
 
 public class DressYourSelfActivity extends FloatingButtonActivity {
 
-    private Toolbar toolbar;   
->>>>>>> develop
+    private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawer;
     private ConjuntosFragment conjuntosFragment;
     private RecyclerView listaDrawer;
 
-<<<<<<< HEAD
-    @Override
+    /*@Override
     public void onBackPressed() {
         if(getSupportFragmentManager().getBackStackEntryCount()!=0){
             getSupportFragmentManager().popBackStackImmediate();
-=======
-
->>>>>>> develop
+    */
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
-        setContentView(R.layout.activity_dressyourself);
-=======
+
         setContentView(R.layout.dress_yourself_activity);        
->>>>>>> develop
+
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -82,11 +59,7 @@ public class DressYourSelfActivity extends FloatingButtonActivity {
         AdapterDrawerNavigation adapter=new AdapterDrawerNavigation(this);
 
 
-<<<<<<< HEAD
-        adapter.setListenerCargarCategoria(cargarCategoriasListener);
-        adapter.setListenerLogout(logoutListener);
-=======
-       
+
         adapter.setOnDrawerLayoutMenuListener(new OnDrawerLayoutMenuListener() {
             @Override
             public void onClicArmario() {
@@ -119,7 +92,6 @@ public class DressYourSelfActivity extends FloatingButtonActivity {
             }
         });
 
->>>>>>> develop
         listaDrawer.setAdapter(adapter);
         conjuntosFragment=new ConjuntosFragment();
 
@@ -186,60 +158,6 @@ public class DressYourSelfActivity extends FloatingButtonActivity {
     }
 
 
-
-<<<<<<< HEAD
-    final View.OnTouchListener cargarCategoriasListener = new View.OnTouchListener()
-    {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            switch (event.getAction()){
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundColor(Color.LTGRAY);
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundColor(Color.TRANSPARENT);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new CategoriasFragment()).addToBackStack(null).commit();
-                    drawerLayout.closeDrawers();
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    v.setBackgroundColor(Color.LTGRAY);
-                    break;
-                default:
-                    v.setBackgroundColor(Color.TRANSPARENT);
-            }
-            return true;
-        }
-    };
-
-   final View.OnTouchListener logoutListener = new View.OnTouchListener()
-   {
-       @Override
-       public boolean onTouch(View v, MotionEvent event)
-       {
-           switch(event.getAction())
-           {
-               case MotionEvent.ACTION_DOWN:
-                   v.setBackgroundColor(Color.LTGRAY);
-                   break;
-               case MotionEvent.ACTION_UP:
-                   v.setBackgroundColor(Color.TRANSPARENT);
-                   ParseUser.logOut();
-                   Intent intent = new Intent(DressYourSelfActivity.this,LoginActivity.class);
-                   startActivity(intent);
-                   finish();
-                   break;
-               case MotionEvent.ACTION_MOVE:
-                   v.setBackgroundColor(Color.LTGRAY);
-                   break;
-               default:
-                   v.setBackgroundColor(Color.TRANSPARENT);
-           }
-           return true;
-       }
-   };
-=======
-
-
     public void onClickVoteButton() {
 
         findViewById(R.id.action_vote).setOnClickListener(new View.OnClickListener() {
@@ -250,7 +168,5 @@ public class DressYourSelfActivity extends FloatingButtonActivity {
         });
 
     }
-    
-    
->>>>>>> develop
+
 }

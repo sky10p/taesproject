@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<<<<<<< HEAD
     <color name="primary">#03A9F4</color>
     <color name="primaryDark">#0288D1</color>
     <color name="primaryLight">#B3E5FC</color>
@@ -9,7 +8,6 @@
     <color name="accentLight">#B9F6CA</color>
     <color name="textColorPrimary">#FFFFFF</color>
 
-=======
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="blueDrawer">#ff4bbeff</color>
@@ -26,5 +24,5 @@
     <color name="blue_semi_transparent">#805677fc</color>
     <color name="blue_semi_transparent_pressed">#80738ffe</color>
     <color name="gray_selected_menu">#EEEEEE</color>
->>>>>>> develop
+
 </resources>

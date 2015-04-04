@@ -1,7 +1,7 @@
 package taes.project.dressyourself.activities;
 
 
-import taes.project.dressyourself.fragment.FloatingButtonFragment;
+import taes.project.dressyourself.fragments.FloatingButtonFragment;
 
 /**
  * Created by pablo on 27/03/15.

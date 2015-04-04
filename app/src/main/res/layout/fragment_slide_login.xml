@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    android:id="@+id/slide_login_content">
+
+        <!--<ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_login"
+            android:alpha="0.5"
+            android:scaleType="fitXY"/>-->
+    <LinearLayout
+        android:id="@+id/login_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="64dp"
+        android:paddingBottom="64dp"
+        android:background="@color/background_material_light"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="50dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/primary_dark_material_dark"
+            android:text="@string/app_name"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/login_title_shadow"
+        android:layout_below="@+id/login_title" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/login_title"
+        android:layout_margin="50dp"
+        android:gravity="center">
+        <Button
+            android:background="@drawable/ingresar_button_custom"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:id="@+id/ingresarBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ingresar" />
+        <Button
+            android:background="@drawable/unirse_button_custom"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:id="@+id/unirseBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/unirse" />
+    </LinearLayout>
+</RelativeLayout>

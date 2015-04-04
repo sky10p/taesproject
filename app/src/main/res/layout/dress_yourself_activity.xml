@@ -12,15 +12,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:orientation="vertical">
-<<<<<<< HEAD:app/src/main/res/layout/activity_dressyourself.xml
-        <include layout="@layout/toolbar"
-            android:id="@+id/toolbar"/>
-        <!-- The main content view -->
-        <FrameLayout
-            android:id="@+id/content_frame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-=======
+
     <include layout="@layout/toolbar"/>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -34,12 +26,11 @@
             <fragment
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                class="taes.project.dressyourself.fragment.FloatingButtonFragment"
+                class="taes.project.dressyourself.fragments.FloatingButtonFragment"
                 android:id="@+id/floatingButtonFragment"
                 tools:layout="@layout/fragment_floating_button" />
             </RelativeLayout>
 
->>>>>>> develop:app/src/main/res/layout/dress_yourself_activity.xml
 
     </LinearLayout>
 
@@ -68,16 +59,7 @@
 
             />
 
-<<<<<<< HEAD:app/src/main/res/layout/activity_dressyourself.xml
     </LinearLayout>
-=======
 
-
-
-        </LinearLayout>
-    
-    
-
->>>>>>> develop:app/src/main/res/layout/dress_yourself_activity.xml
 
 </android.support.v4.widget.DrawerLayout>

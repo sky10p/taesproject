@@ -38,6 +38,11 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+        <activity android:name=".ScreenSlideActivity"
+            android:label="ScreenSlideActivity"
+            android:theme="@style/AppTheme">
+
+        </activity>
         <activity
             android:name=".PublicacionActivity"
             android:label="@string/title_activity_publicacion" >

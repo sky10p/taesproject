@@ -13,14 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-<<<<<<< HEAD
-import com.parse.ParseUser;
-
-import taes.project.dressyourself.DressYourSelfActivity;
-import taes.project.dressyourself.LoginActivity;
-import taes.project.dressyourself.MainActivity;
-=======
->>>>>>> develop
 import taes.project.dressyourself.R;
 import taes.project.dressyourself.interfaces.OnDrawerLayoutMenuListener;
 
@@ -33,13 +25,8 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
     TypedArray iconsMenu;
 
     Context context;
-<<<<<<< HEAD
-    private View.OnTouchListener listenerCargarCategoria;
-    private View.OnTouchListener logoutListener;
-=======
     private OnDrawerLayoutMenuListener listener;
 
->>>>>>> develop
 
     public AdapterDrawerNavigation(Context context) {
         this.context=context;
@@ -53,10 +40,6 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
 
     public void setOnDrawerLayoutMenuListener(OnDrawerLayoutMenuListener listener){
         this.listener =listener;
-    }
-    public void setListenerLogout(View.OnTouchListener listener)
-    {
-        logoutListener = listener;
     }
 
     @Override
@@ -99,19 +82,8 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
             holder.texto.setText(listMenu[position]);
 
             holder.imagen.setImageResource(iconsMenu.getResourceId(position,android.R.drawable.ic_menu_preferences));
-<<<<<<< HEAD
-            switch(position)
-            {
-                case 0:
-                    holder.itemView.setOnTouchListener(listenerCargarCategoria);
-                    break;
-                case 5:
-                    holder.itemView.setOnTouchListener(logoutListener);
-            }
-=======
 
             holder.itemView.setOnClickListener(this);
->>>>>>> develop
 
         }
 

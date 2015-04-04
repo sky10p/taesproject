@@ -4,8 +4,6 @@ import android.content.pm.ActivityInfo;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -15,8 +13,8 @@ import android.widget.TextView;
 
 import taes.project.dressyourself.animation.LayoutAnimation;
 import taes.project.dressyourself.animation.VisibilityAnimationListener;
-import taes.project.dressyourself.fragment.LoginFragment;
-import taes.project.dressyourself.fragment.SignupFragment;
+import taes.project.dressyourself.fragments.LoginFragment;
+import taes.project.dressyourself.fragments.SignupFragment;
 
 
 public class LoginActivity extends ActionBarActivity {
@@ -73,8 +71,6 @@ public class LoginActivity extends ActionBarActivity {
         imgSplash.startAnimation(animation);
 
     }
-
-
 
     private void configureTabHost() {
         tabHost= (FragmentTabHost) findViewById(android.R.id.tabhost);
