@@ -21,7 +21,7 @@ public class MainActivity extends ActionBarActivity {
         // Ver si el usuario actual es un usuario anónimo
         if(ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())){
             // si es anónimo le mostramos el lógin
-            Intent intent = new Intent(this,LoginActivity.class);
+            Intent intent = new Intent(this,ScreenSlideActivity.class);
             startActivity(intent);
             finish();
         }else{
@@ -31,7 +31,6 @@ public class MainActivity extends ActionBarActivity {
             finish();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,6 +85,4 @@ public class MainActivity extends ActionBarActivity {
 
         return bitmap;
     }
-
-
 }

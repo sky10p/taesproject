@@ -1,4 +1,4 @@
-package taes.project.dressyourself.fragment;
+package taes.project.dressyourself.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;

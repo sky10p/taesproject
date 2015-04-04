@@ -42,8 +42,6 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
         this.listener =listener;
     }
 
-
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 

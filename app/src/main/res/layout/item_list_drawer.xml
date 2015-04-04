@@ -1,11 +1,10 @@
-<LinearLayout
-    android:layout_height="48dp" android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="48dp"
+    android:layout_width="match_parent"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:background="@drawable/menu_background_item"
+    android:background="@drawable/menu_background_item">
 
-    >
 
     <ImageView
         android:id="@+id/imgIcon"
@@ -13,17 +12,11 @@
         android:layout_height="18dp"
         android:layout_marginLeft="@dimen/drawer_layout_margin_left"
         android:layout_marginRight="32dp"
-
         android:src="@android:drawable/ic_menu_preferences"/>
-
     <TextView
         android:id="@+id/txtTextMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:text="Prueba y eso"/>
-
-
-
+        />
 
 </LinearLayout>

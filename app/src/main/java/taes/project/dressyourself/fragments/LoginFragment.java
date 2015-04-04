@@ -1,4 +1,4 @@
-package taes.project.dressyourself.fragment;
+package taes.project.dressyourself.fragments;
 
 
 import android.content.Intent;
@@ -13,10 +13,9 @@ import android.widget.EditText;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-
+import android.widget.Toast;
 
 import taes.project.dressyourself.DressYourSelfActivity;
-import taes.project.dressyourself.LoginActivity;
 import taes.project.dressyourself.R;
 
 
@@ -45,6 +44,7 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loginButton.setEnabled(false);
                 // obtener los datos de los campos
                 username = usernameText.getText().toString();
                 password = passwordText.getText().toString();
@@ -58,32 +58,16 @@ public class LoginFragment extends Fragment {
                             startActivity(intent);
                             getActivity().finish();
                         }else{
-                            // la autenticación no ha tenido exito
-                            Intent intent = new Intent(getActivity(),LoginActivity.class);
-                            startActivity(intent);
-                            getActivity().finish();
+                            Toast.makeText(
+                                    getActivity(),
+                                    "Usuario y/o contraseña incorrectos",
+                                    Toast.LENGTH_LONG).show();
+                            loginButton.setEnabled(true);
                         }
                     }
                 });
             }
         });
-
-        /*
-        Bundle bundle=getArguments();
-        if(bundle.getString("type").equals(getString(R.string.login))){
-
-            btnComplete.setText(getString(R.string.start_session));
-            btnComplete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(getActivity(), DressYourSelfActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                }
-            });
-        }else{
-            btnComplete.setText(getString(R.string.complete_register));
-        }*/
         return v;
     }
 }

@@ -1,7 +1,6 @@
-package taes.project.dressyourself.fragment;
+package taes.project.dressyourself.fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,12 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.parse.LogInCallback;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-
-import taes.project.dressyourself.DressYourSelfActivity;
-import taes.project.dressyourself.LoginActivity;
 import taes.project.dressyourself.R;
 
 

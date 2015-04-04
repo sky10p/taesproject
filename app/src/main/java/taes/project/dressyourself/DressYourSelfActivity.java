@@ -1,53 +1,56 @@
 package taes.project.dressyourself;
 
 
-import android.app.FragmentManager;
+
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
 import com.parse.ParseUser;
 
 import taes.project.dressyourself.activities.FloatingButtonActivity;
 import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
-import taes.project.dressyourself.fragment.CategoriasFragment;
-import taes.project.dressyourself.fragment.ConjuntosFragment;
-import taes.project.dressyourself.fragment.FloatingButtonFragment;
+import taes.project.dressyourself.fragments.CategoriasFragment;
+import taes.project.dressyourself.fragments.ConjuntosFragment;
+import taes.project.dressyourself.fragments.FloatingButtonFragment;
 import taes.project.dressyourself.interfaces.OnDrawerLayoutMenuListener;
 
 
 public class DressYourSelfActivity extends FloatingButtonActivity {
 
-    private Toolbar toolbar;   
+    private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawer;
     private ConjuntosFragment conjuntosFragment;
     private RecyclerView listaDrawer;
 
-
+    /*@Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().getBackStackEntryCount()!=0){
+            getSupportFragmentManager().popBackStackImmediate();
+    */
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.dress_yourself_activity);        
 
 
-        toolbar= (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(R.mipmap.ic_dress_your_self_circle);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         listaDrawer= (RecyclerView) findViewById(R.id.left_drawer);
@@ -56,7 +59,7 @@ public class DressYourSelfActivity extends FloatingButtonActivity {
         AdapterDrawerNavigation adapter=new AdapterDrawerNavigation(this);
 
 
-       
+
         adapter.setOnDrawerLayoutMenuListener(new OnDrawerLayoutMenuListener() {
             @Override
             public void onClicArmario() {
@@ -115,7 +118,8 @@ public class DressYourSelfActivity extends FloatingButtonActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.searchview, menu);
         return true;
     }
 
@@ -154,9 +158,6 @@ public class DressYourSelfActivity extends FloatingButtonActivity {
     }
 
 
-
-
-
     public void onClickVoteButton() {
 
         findViewById(R.id.action_vote).setOnClickListener(new View.OnClickListener() {
@@ -167,6 +168,5 @@ public class DressYourSelfActivity extends FloatingButtonActivity {
         });
 
     }
-    
-    
+
 }
