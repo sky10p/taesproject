@@ -13,7 +13,8 @@ import android.widget.EditText;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-import android.widget.Toast;
+
+import android.widget.TextView;
 
 import taes.project.dressyourself.DressYourSelfActivity;
 import taes.project.dressyourself.R;
@@ -23,11 +24,12 @@ import taes.project.dressyourself.R;
  * Created by pablo on 9/03/15.
  */
 public class LoginFragment extends Fragment {
-    String username;
-    String password;
-    EditText usernameText;
-    EditText passwordText;
-    Button loginButton;
+    private String username;
+    private String password;
+    private EditText usernameText;
+    private EditText passwordText;
+    private Button loginButton;
+    private TextView error;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,8 +39,9 @@ public class LoginFragment extends Fragment {
         loginButton = (Button) v.findViewById(R.id.loginbtn);
 
         // obtener campos desde el layout para el login
-        usernameText = (EditText) v.findViewById(R.id.txtUserName);
-        passwordText = (EditText) v.findViewById(R.id.txtPassword);
+        usernameText = (EditText) v.findViewById(R.id.textUsername);
+        passwordText = (EditText) v.findViewById(R.id.textPassword);
+        error = (TextView) v.findViewById(R.id.textError);
 
         // login button click
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -48,20 +51,27 @@ public class LoginFragment extends Fragment {
                 // obtener los datos de los campos
                 username = usernameText.getText().toString();
                 password = passwordText.getText().toString();
+                error.setVisibility(View.INVISIBLE);
                 // enviar los datos a parse para comprobar si son correctos
                 ParseUser.logInInBackground(username, password, new LogInCallback() {
                     @Override
                     public void done(ParseUser parseUser, ParseException e) {
                         if (parseUser != null) {
-                            // la autenticación ha tenido éxito
-                            Intent intent = new Intent(getActivity(), DressYourSelfActivity.class);
-                            startActivity(intent);
-                            getActivity().finish();
+                            // autenticación correcto
+                            if(parseUser.getBoolean("emailVerified")){
+                                // email verificado
+                                Intent intent = new Intent(getActivity(), DressYourSelfActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
+                            }else{
+                                // falta verificar email
+                                error.setText(R.string.email_not_verified);
+                                error.setVisibility(View.VISIBLE);
+                                loginButton.setEnabled(true);
+                            }
                         }else{
-                            Toast.makeText(
-                                    getActivity(),
-                                    "Usuario y/o contraseña incorrectos",
-                                    Toast.LENGTH_LONG).show();
+                            error.setText(R.string.wrong_user_password);
+                            error.setVisibility(View.VISIBLE);
                             loginButton.setEnabled(true);
                         }
                     }

@@ -7,6 +7,8 @@
     <color name="accentDark">#00E676</color>
     <color name="accentLight">#B9F6CA</color>
     <color name="textColorPrimary">#FFFFFF</color>
+    <color name="error_red">#FF0000</color>
+    <color name="success_green">#33CC33</color>
 
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
