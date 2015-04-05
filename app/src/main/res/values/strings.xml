@@ -18,6 +18,9 @@
     <string name="ingresar">Ingresar</string>
     <string name="unirse">Unirse</string>
     <string name="forgot_password">¿Ha olvidado su contraseña? Pulse aquí para recuperarla</string>
+    <string name="wrong_user_password">Usuario y/o contraseña incorrectos</string>
+    <string name="email_not_verified">El usuario necesita verificar su correo electrónico</string>
+    <string name="success_signup">Registro completado. Se le ha enviado un e-mail de verificación, revise su correo.</string>
 
     <string name="complete_register">Completar Registro</string>
     <string name="splash_description">Vistete con ayuda</string>

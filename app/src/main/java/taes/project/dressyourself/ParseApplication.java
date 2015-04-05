@@ -16,10 +16,11 @@ public class ParseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Parse.enableLocalDatastore(this);
+        //Parse.enableLocalDatastore(this);
         Parse.initialize(this, APP_ID, CLIENT_KEY);
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
+        defaultACL.setPublicReadAccess(true);
         ParseACL.setDefaultACL(defaultACL, true);
     }
 }

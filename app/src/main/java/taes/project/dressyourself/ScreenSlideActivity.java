@@ -2,12 +2,12 @@ package taes.project.dressyourself;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+
 
 import taes.project.dressyourself.fragments.LoginSignupFragment;
 import taes.project.dressyourself.fragments.SlidePageFragment;
@@ -44,6 +44,8 @@ public class ScreenSlideActivity extends ActionBarActivity {
         mPager.setAdapter(mPagerAdapter);
         mPager.setPageTransformer(true, new DepthPageTransformer());
     }
+
+
 
     @Override
     public void onBackPressed() {
