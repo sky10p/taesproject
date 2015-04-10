@@ -38,13 +38,24 @@ public class FloatingButtonFragment extends Fragment {
             @Override
             public void onMenuExpanded() {
                 relativeLayout.setBackgroundResource(R.color.black_semi_transparent);
+                relativeLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        btnFloatingMain.collapse();
+                    }
+                });
+                relativeLayout.setClickable(true);
             }
 
             @Override
             public void onMenuCollapsed() {
                 relativeLayout.setBackgroundColor(Color.TRANSPARENT);
+                relativeLayout.setClickable(false);
             }
         });
+
+
+
 
 
 

@@ -18,5 +18,6 @@
         <item>@android:drawable/divider_horizontal_dark</item>
         <item>@drawable/ajustes</item>
         <item>@drawable/ayuda</item>
+        <item>@drawable/sign_out</item>
     </integer-array>
 </resources>

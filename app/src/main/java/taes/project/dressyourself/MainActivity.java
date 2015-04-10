@@ -1,12 +1,13 @@
 package taes.project.dressyourself;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.parse.Parse;
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseUser;
 
@@ -27,6 +28,7 @@ public class MainActivity extends ActionBarActivity {
             Intent intent = new Intent(this,DressYourSelfActivity.class);
             startActivity(intent);
             finish();
+
         }
     }
 
@@ -52,4 +54,38 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    /**
+     * Decodificacion de imagen
+     * Si es para mostrar en una vista pasar dimensiones de dicha vista
+     * Si es para hacer Parse pasar dimensiones maximas permitidas para la subida
+     * @param anchura anchura de la imagen devuelta
+     * @param altura altura de la imagen devuelta
+     * @return bitmap decodificada
+     */
+    private Bitmap decodificarImagen(int anchura, int altura) {
+
+        //Borrar (Para no dar error)
+        String mCurrentPhotoPath = "";
+
+        // Dimensiones del bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+
+        //mCurrentPhotoPath es la ruta de la imagen a decodificar
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        int photoAnchura = bmOptions.outWidth;
+        int photoAltura = bmOptions.outHeight;
+
+        // Determina la escala
+        int scaleFactor = Math.min(photoAnchura/anchura, photoAltura/altura);
+
+        // Decodificacion de la imagen
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+
+        return bitmap;
+    }
+
+
 }
