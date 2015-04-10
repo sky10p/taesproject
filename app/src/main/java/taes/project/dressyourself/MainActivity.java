@@ -3,12 +3,11 @@ package taes.project.dressyourself;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.parse.Parse;
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseUser;
 
@@ -19,9 +18,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Ver si el usuario actual es un usuario anónimo
-        if(ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())){
-            // si es anónimo le mostramos el lógin
-            Intent intent = new Intent(this,LoginActivity.class);
+        if(ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser()) || !ParseUser.getCurrentUser().getBoolean("emailVerified")){
+            // si es anónimo le mostramos el login
+            Intent intent = new Intent(this,ScreenSlideActivity.class);
             startActivity(intent);
             finish();
         }else{
@@ -31,7 +30,6 @@ public class MainActivity extends ActionBarActivity {
             finish();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,6 +84,4 @@ public class MainActivity extends ActionBarActivity {
 
         return bitmap;
     }
-
-
 }
