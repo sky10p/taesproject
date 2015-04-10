@@ -1,7 +1,6 @@
 package taes.project.dressyourself;
 
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -14,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 
 import com.parse.ParseUser;
 
@@ -150,6 +148,7 @@ public class DressYourSelfActivity extends FloatingButtonActivity {
         findViewById(R.id.action_photo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(DressYourSelfActivity.this, CameraActivity.class);
                 startActivity(intent);
             }

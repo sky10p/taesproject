@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 
 
+import com.viewpagerindicator.LinePageIndicator;
+
 import taes.project.dressyourself.fragments.LoginSignupFragment;
 import taes.project.dressyourself.fragments.SlidePageFragment;
 import taes.project.dressyourself.transformers.DepthPageTransformer;
@@ -43,6 +45,8 @@ public class ScreenSlideActivity extends ActionBarActivity {
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
         mPager.setPageTransformer(true, new DepthPageTransformer());
+        LinePageIndicator indicator = (LinePageIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(mPager);
     }
 
 

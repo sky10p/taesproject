@@ -21,6 +21,11 @@
     <string name="wrong_user_password">Usuario y/o contraseña incorrectos</string>
     <string name="email_not_verified">El usuario necesita verificar su correo electrónico</string>
     <string name="success_signup">Registro completado. Se le ha enviado un e-mail de verificación, revise su correo.</string>
+    <string name="insertar">Insertar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="nombre_categoria">Nombre categoría</string>
+    <string name="nueva_categoria">Nueva categoria</string>
 
     <string name="complete_register">Completar Registro</string>
     <string name="splash_description">Vistete con ayuda</string>
