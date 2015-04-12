@@ -1,18 +1,25 @@
 package taes.project.dressyourself;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,8 +28,14 @@ import com.parse.ParseUser;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import taes.project.dressyourself.adapter.AdapterCategoria;
+import taes.project.dressyourself.classes.Categoria;
 
 
 public class CameraActivity extends ActionBarActivity {
@@ -34,13 +47,17 @@ public class CameraActivity extends ActionBarActivity {
     
     private String RESIZE = "resize";
 
+    //categoria a crear
+    private EditText cat;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        addPhoto();
         setContentView(R.layout.camera_activity);
-        dispatchTakePictureIntent();
+
     }
 
 
@@ -65,6 +82,105 @@ public class CameraActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        if(id != 0) {
+
+            List<Categoria> list = new AdapterCategoria().categorias;
+            final ArrayList<String> itemss = new ArrayList<String>(list.size());
+            for (int i = 0; i< list.size(); i++){
+                itemss.add(((Categoria) list.get(i)).getNombre());
+            }
+            final CharSequence[] charSequenceItems = itemss.toArray(new CharSequence[itemss.size()]);
+                builder.setTitle("Seleccione la Categoría");
+            builder.setSingleChoiceItems(charSequenceItems, -1, new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int item) {
+                    dispatchTakePictureIntent();
+                    dialog.cancel();
+                }
+            });
+        }
+        else
+        {
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialog = inflater.inflate(R.layout.dialog_insertar_categoria, null);
+
+            cat = (EditText) dialog.findViewById(R.id.textCategoria);
+            // Inflate and set the layout for the dialog
+            // Pass null as the parent view because its going in the dialog layout
+            builder.setView(dialog)
+                    // Add action buttons
+                    .setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            Categoria categoria = new Categoria();
+                            categoria.put("nombre", cat.getText().toString());
+                            categoria.put("createdBy", ParseUser.getCurrentUser());
+                            categoria.saveInBackground();
+                            CameraActivity.this.finish();
+                            Intent intent = new Intent(CameraActivity.this, CameraActivity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                            CameraActivity.this.finish();
+                        }
+                    });
+        }
+        return builder.create();
+    }
+    private class CategorySize extends AsyncTask<Void, Void, List<Categoria>> {
+        protected synchronized List<Categoria> doInBackground(Void... params) {
+            AdapterCategoria adapter = new AdapterCategoria();
+            adapter.notifyDataSetChanged();
+            List<Categoria> lista = adapter.categorias;
+
+            Log.v("TEST", Integer.toString(lista.size())+" doinbackground");
+            return lista;
+        }
+        protected void onPostExecute(List<Categoria> result) {
+            Log.v("TEST", Integer.toString(result.size()));
+            showDialog(result.size());
+        }
+    }
+    private class Categorys extends AsyncTask<URL, Integer, List> {
+        protected List<Categoria> doInBackground(URL... urls) {
+            List <Categoria> lista = new AdapterCategoria().categorias;
+            return lista;
+        }
+
+        protected void onProgressUpdate(Integer... progress) {
+        }
+
+        protected void onPostExecute(List<Categoria> result) {
+            //showDialog(result);
+        }
+    }
+
+
+
+    public void addPhoto() {
+
+        /*
+        // Funcionalidad correcta
+        showDialog(new AdapterCategoria().getItemCount());
+        */
+
+        // Hasta correccion codigo con datos de prueba
+        //showDialog(new AdapterCategoria().getItemCount());
+        //showDialog(3);
+        new CategorySize().execute();
+    }
+
+
+
 
 
     //Crea una imagen unica en memoria destino  y la devuelve
@@ -132,7 +248,7 @@ public class CameraActivity extends ActionBarActivity {
     }
 
     public void setPic() {
-        
+        checkFile();
         ImageView imageView = (ImageView) findViewById(R.id.imageView1);        
         Bitmap bMap = getBitmap();
         imageView.setImageBitmap(bMap);
@@ -221,47 +337,5 @@ public class CameraActivity extends ActionBarActivity {
             }
         }
     }
-/*
-    public Bitmap decodeSampledBitmapFromMemory(int reqWidth, int reqHeight) {
 
-        // First decode with inJustDecodeBounds=true to check dimensions
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        
-        
-        BitmapFactory.decodeFile(mCurrentPhotoPath);
-            // Calculate inSampleSize
-            options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-
-            // Decode bitmap with inSampleSize set
-            options.inJustDecodeBounds = false;
-            return BitmapFactory.decodeFile(mCurrentPhotoPath);
-
-       
-    }
-    
-      public static int calculateInSampleSize(
-            BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        // Raw height and width of image
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-
-        if (height > reqHeight || width > reqWidth) {
-
-            final int halfHeight = height / 2;
-            final int halfWidth = width / 2;
-
-            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-            // height and width larger than the requested height and width.
-            while ((halfHeight / inSampleSize) > reqHeight
-                    && (halfWidth / inSampleSize) > reqWidth) {
-                inSampleSize *= 2;
-            }
-        }
-
-        return inSampleSize;
-    }
-
-*/
 }

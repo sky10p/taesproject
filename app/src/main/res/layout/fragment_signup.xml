@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background_material_light"
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp"
+    android:paddingTop="100dp"
+    android:clickable="true">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/unirse"
+        android:id="@+id/textView4"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="20dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textError"
+        android:textColor="@color/error_red"
+        android:layout_gravity="center"
+        />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtUserName"
+        android:id="@+id/textUsername"
         android:inputType="text"
-        android:hint="@string/userName"/>
+        android:hint="@string/username"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtEmail"
+        android:id="@+id/textEmail"
         android:inputType="textEmailAddress"
         android:hint="@string/email"/>
     <EditText
@@ -22,12 +43,19 @@
         android:inputType="textPassword"
         android:ems="10"
         android:hint="@string/password"
-        android:id="@+id/txtPassword" />
+        android:id="@+id/textPassword" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="@string/signup"
         android:id="@+id/signupbtn" />
-
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textSignupSuccess"
+        android:textColor="@color/success_green"
+        android:text="@string/success_signup"
+        android:layout_gravity="center"
+        android:visibility="invisible" />
 </LinearLayout>

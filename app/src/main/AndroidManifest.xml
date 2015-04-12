@@ -26,10 +26,6 @@
             android:label="@string/title_activity_main" >
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" >
-        </activity>
-        <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
@@ -37,6 +33,11 @@
 
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ScreenSlideActivity"
+            android:label="ScreenSlideActivity"
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".PublicacionActivity"

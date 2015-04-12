@@ -18,9 +18,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Ver si el usuario actual es un usuario anónimo
-        if(ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())){
-            // si es anónimo le mostramos el lógin
-            Intent intent = new Intent(this,LoginActivity.class);
+        if(ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser()) || !ParseUser.getCurrentUser().getBoolean("emailVerified")){
+            // si es anónimo le mostramos el login
+            Intent intent = new Intent(this,ScreenSlideActivity.class);
             startActivity(intent);
             finish();
         }else{
@@ -31,7 +31,6 @@ public class MainActivity extends ActionBarActivity {
 
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,6 +85,4 @@ public class MainActivity extends ActionBarActivity {
 
         return bitmap;
     }
-
-
 }

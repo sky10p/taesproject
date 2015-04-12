@@ -2,37 +2,29 @@ package taes.project.dressyourself.adapter;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.parse.ParseUser;
-
-import taes.project.dressyourself.LoginActivity;
-import taes.project.dressyourself.MainActivity;
 import taes.project.dressyourself.R;
-import taes.project.dressyourself.fragment.CategoriasFragment;
+import taes.project.dressyourself.interfaces.OnDrawerLayoutMenuListener;
 
 /**
  * Created by pablo on 6/03/15.
  */
-public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerNavigation.ViewHolder> {
+public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerNavigation.ViewHolder> implements  View.OnClickListener {
 
     String[] listMenu;
     TypedArray iconsMenu;
 
     Context context;
-    private View.OnTouchListener listenerCargarCategoria;
+    private OnDrawerLayoutMenuListener listener;
 
 
     public AdapterDrawerNavigation(Context context) {
@@ -45,11 +37,9 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
 
     }
 
-    public void setListenerCargarCategoria(View.OnTouchListener listener){
-        listenerCargarCategoria=listener;
+    public void setOnDrawerLayoutMenuListener(OnDrawerLayoutMenuListener listener){
+        this.listener =listener;
     }
-
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -91,9 +81,9 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
             holder.texto.setText(listMenu[position]);
 
             holder.imagen.setImageResource(iconsMenu.getResourceId(position,android.R.drawable.ic_menu_preferences));
-            if(position==0){
-                holder.itemView.setOnTouchListener(listenerCargarCategoria);
-            }
+
+            holder.itemView.setOnClickListener(this);
+
         }
 
 
@@ -102,6 +92,37 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
     @Override
     public int getItemCount() {
         return listMenu.length;
+    }
+
+
+
+
+
+
+    private void onItemClick(String texto) {
+        if(texto.equals(context.getResources().getString(R.string.armario))){
+            listener.onClicArmario();
+        }
+        if(texto.equals(context.getResources().getString(R.string.amigos))){
+            listener.onClicAmigos();
+        }
+        if(texto.equals(context.getResources().getString(R.string.ajustes))){
+            listener.onClicAjustes();
+        }
+        if(texto.equals(context.getResources().getString(R.string.ayuda))){
+            listener.onClicAyuda();
+        }
+        if(texto.equals(context.getResources().getString(R.string.sign_out))){
+            listener.onClicCerrarSesion();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        TextView textView= (TextView) v.findViewById(R.id.txtTextMenu);
+        String texto=textView.getText().toString();
+
+        onItemClick(texto);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -113,6 +134,7 @@ public class AdapterDrawerNavigation extends RecyclerView.Adapter<AdapterDrawerN
         public ViewHolder(View itemView,boolean divider) {
             super(itemView);
             this.itemView=itemView;
+
             context = itemView.getContext();
 
 

@@ -3,8 +3,11 @@ package taes.project.dressyourself;
 import android.app.Application;
 
 import com.parse.Parse;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.ParseACL;
+
+import taes.project.dressyourself.classes.Categoria;
 
 /**
  * Conexion con Parse.com
@@ -16,10 +19,12 @@ public class ParseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Parse.enableLocalDatastore(this);
+        //Parse.enableLocalDatastore(this);
+        ParseObject.registerSubclass(Categoria.class);
         Parse.initialize(this, APP_ID, CLIENT_KEY);
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
+        defaultACL.setPublicReadAccess(true);
         ParseACL.setDefaultACL(defaultACL, true);
     }
 }
