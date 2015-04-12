@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,8 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.View
     }
 
     public List<Categoria> categorias;
+    private SparseBooleanArray selectedItems;
+
 
     public AdapterCategoria(){
         this.categorias = new ArrayList<>();
@@ -43,6 +46,7 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.View
                 notifyDataSetChanged();
             }
         });
+        selectedItems = new SparseBooleanArray();
     }
 
     @Override
@@ -56,7 +60,7 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.View
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         holder.nombre.setText(categorias.get(position).getNombre());
-
+        holder.itemView.setActivated(selectedItems.get(position,false));
         /*AsyncTask<Bitmap, Void, Palette> palette=Palette.generateAsync(drawableBitMap.getBitmap(), new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
@@ -70,13 +74,52 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.View
 
     }
 
+
     @Override
     public int getItemCount() {
         return categorias.size();
     }
 
+    public void selected(int position)
+    {
+        if(selectedItems.get(position, false)){
+            selectedItems.delete(position);
+        }else{
+            selectedItems.put(position, true);
+        }
+        notifyItemChanged(position);
+    }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public void clearSelections()
+    {
+        selectedItems.clear();
+        notifyDataSetChanged();
+    }
+
+    public int getSelectedItemsCount()
+    {
+        return selectedItems.size();
+    }
+
+    public List<Integer> getSelectedItems()
+    {
+        List<Integer> items = new ArrayList<Integer>(selectedItems.size());
+        for (int i = 0; i < selectedItems.size(); i++) {
+            items.add(selectedItems.keyAt(i));
+        }
+        return items;
+    }
+
+    public List<Categoria> getSelectedItemsAsCategoria()
+    {
+        List<Categoria> selected = new ArrayList<>(selectedItems.size());
+        for(int i=0;i<selectedItems.size();i++){
+            selected.add(categorias.get(selectedItems.keyAt(i)));
+        }
+        return selected;
+    }
+
+    public final static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView nombre;
         public ViewHolder(View itemView) {
             super(itemView);

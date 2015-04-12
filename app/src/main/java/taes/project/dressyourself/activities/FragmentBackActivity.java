@@ -8,13 +8,10 @@ import android.support.v7.app.ActionBarActivity;
  */
 public class FragmentBackActivity extends ActionBarActivity {
 
-
-
     @Override
     public void onBackPressed() {
-
-        if(getSupportFragmentManager().getBackStackEntryCount()!=0){
-            getSupportFragmentManager().popBackStackImmediate();
+       if(getSupportFragmentManager().getBackStackEntryCount()!=0){
+            getSupportFragmentManager().popBackStack();
 
         }else
         {
