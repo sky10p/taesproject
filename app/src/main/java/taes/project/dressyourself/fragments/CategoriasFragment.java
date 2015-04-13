@@ -56,6 +56,7 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
             public void onBack() {
                 if(actionMode==null){
                     ((DressYourSelfActivity) context).setOnBackPressedListener(null);
+                    context.onBackPressed();
                 }else{
                     actionMode.finish();
                 }
@@ -165,7 +166,7 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
         @Override
         public void onDestroyActionMode(ActionMode mode) {
             adapter.clearSelections();
-            actionMode = null;
+            actionMode=null;
             mode = null;
         }
     };
