@@ -108,6 +108,7 @@ public class DressYourSelfActivity extends FloatingButtonActivity {
             }
         });
 
+        if(savedInstanceState == null)
         getSupportFragmentManager().beginTransaction().add(R.id.content_frame,conjuntosFragment).commit();
 
         onClickPhotoAndVoteButton();

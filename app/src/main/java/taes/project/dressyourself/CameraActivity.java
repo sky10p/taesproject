@@ -1,25 +1,18 @@
 package taes.project.dressyourself;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -28,17 +21,16 @@ import com.parse.ParseUser;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import taes.project.dressyourself.adapter.AdapterCategoria;
 import taes.project.dressyourself.classes.Categoria;
+import taes.project.dressyourself.fragments.CategoryPhotoDialogFragment;
 
 
-public class CameraActivity extends ActionBarActivity {
+public class CameraActivity extends ActionBarActivity implements CategoryPhotoDialogFragment.CategoriaDialogListener {
 
     //Entero que especifica la cantidad de fotos a tirar
     static final int REQUEST_IMAGE_CAPTURE = 0;
@@ -47,17 +39,24 @@ public class CameraActivity extends ActionBarActivity {
     
     private String RESIZE = "resize";
 
-    //categoria a crear
-    private EditText cat;
+    //Lista de categorias a mostrar
+    List<Categoria> categorias = null;
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPhoto();
-        setContentView(R.layout.camera_activity);
-
     }
 
 
@@ -84,99 +83,19 @@ public class CameraActivity extends ActionBarActivity {
     }
 
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        if(id != 0) {
-
-            List<Categoria> list = new AdapterCategoria().categorias;
-            final ArrayList<String> itemss = new ArrayList<String>(list.size());
-            for (int i = 0; i< list.size(); i++){
-                itemss.add(((Categoria) list.get(i)).getNombre());
-            }
-            final CharSequence[] charSequenceItems = itemss.toArray(new CharSequence[itemss.size()]);
-                builder.setTitle("Seleccione la Categoría");
-            builder.setSingleChoiceItems(charSequenceItems, -1, new DialogInterface.OnClickListener() {
-
-                public void onClick(DialogInterface dialog, int item) {
-                    dispatchTakePictureIntent();
-                    dialog.cancel();
-                }
-            });
-        }
-        else
-        {
-            LayoutInflater inflater = this.getLayoutInflater();
-            View dialog = inflater.inflate(R.layout.dialog_insertar_categoria, null);
-
-            cat = (EditText) dialog.findViewById(R.id.textCategoria);
-            // Inflate and set the layout for the dialog
-            // Pass null as the parent view because its going in the dialog layout
-            builder.setView(dialog)
-                    // Add action buttons
-                    .setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            Categoria categoria = new Categoria();
-                            categoria.put("nombre", cat.getText().toString());
-                            categoria.put("createdBy", ParseUser.getCurrentUser());
-                            categoria.saveInBackground();
-                            CameraActivity.this.finish();
-                            Intent intent = new Intent(CameraActivity.this, CameraActivity.class);
-                            startActivity(intent);
-                        }
-                    })
-                    .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                            CameraActivity.this.finish();
-                        }
-                    });
-        }
-        return builder.create();
-    }
-    private class CategorySize extends AsyncTask<Void, Void, List<Categoria>> {
-        protected synchronized List<Categoria> doInBackground(Void... params) {
-            AdapterCategoria adapter = new AdapterCategoria();
-            adapter.notifyDataSetChanged();
-            List<Categoria> lista = adapter.categorias;
-
-            Log.v("TEST", Integer.toString(lista.size())+" doinbackground");
-            return lista;
-        }
-        protected void onPostExecute(List<Categoria> result) {
-            Log.v("TEST", Integer.toString(result.size()));
-            showDialog(result.size());
-        }
-    }
-    private class Categorys extends AsyncTask<URL, Integer, List> {
-        protected List<Categoria> doInBackground(URL... urls) {
-            List <Categoria> lista = new AdapterCategoria().categorias;
-            return lista;
-        }
-
-        protected void onProgressUpdate(Integer... progress) {
-        }
-
-        protected void onPostExecute(List<Categoria> result) {
-            //showDialog(result);
-        }
-    }
-
-
 
     public void addPhoto() {
 
-        /*
-        // Funcionalidad correcta
-        showDialog(new AdapterCategoria().getItemCount());
-        */
-
-        // Hasta correccion codigo con datos de prueba
-        //showDialog(new AdapterCategoria().getItemCount());
-        //showDialog(3);
-        new CategorySize().execute();
+        categorias = Categoria.getAllByUser(ParseUser.getCurrentUser(), new AdapterCategoria.AdapterCategoriaCallback() {
+            @Override
+            public void onDataLoaded() {
+                CategoryPhotoDialogFragment dialog = new CategoryPhotoDialogFragment();
+                dialog.setCategorias(categorias);
+                dialog.setCancelable(false);
+                dialog.setDialogListener(CameraActivity.this);
+                dialog.show(getFragmentManager(), "Categorias dialog");
+            }
+        });
     }
 
 
@@ -184,11 +103,11 @@ public class CameraActivity extends ActionBarActivity {
 
 
     //Crea una imagen unica en memoria destino  y la devuelve
-    private File createImageFile() throws IOException {
+    private File createImageFile(String category) throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES +"/"+ParseUser.getCurrentUser().getUsername());
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES +"/"+ParseUser.getCurrentUser().getUsername()+"/"+category);
         if (!storageDir.exists()) {
             storageDir.mkdir();
         }
@@ -203,7 +122,7 @@ public class CameraActivity extends ActionBarActivity {
         return image;
     }
     //invoca a la app camara y captura la imagen
-    private void dispatchTakePictureIntent() {
+    public void dispatchTakePictureIntent(String category) {
         //Si no existe algun softare para camara devuelve un mesnsaje denegando
         Context context = CameraActivity.this;
         PackageManager packageManager = context.getPackageManager();
@@ -218,16 +137,20 @@ public class CameraActivity extends ActionBarActivity {
             // Create the File where the photo should go
             File photoFile = null;
             try {
-                photoFile = createImageFile();
+                photoFile = createImageFile(category);
             } catch (IOException ex) {
                 // Error occurred while creating the File
                 Log.e("dispatchTakePicture", "dispatchTakePictureIntent: Error creando imagen: " + ex.getMessage());
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
+
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                         Uri.fromFile(photoFile));
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
+            else{
+                checkFile();
             }
         }
     }
@@ -248,6 +171,8 @@ public class CameraActivity extends ActionBarActivity {
     }
 
     public void setPic() {
+        //carga el layout correspondiente
+        setContentView(R.layout.camera_activity);
         checkFile();
         ImageView imageView = (ImageView) findViewById(R.id.imageView1);        
         Bitmap bMap = getBitmap();
@@ -338,4 +263,8 @@ public class CameraActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    public void onDialogAccept(String categoria) {
+        dispatchTakePictureIntent(categoria);
+    }
 }
