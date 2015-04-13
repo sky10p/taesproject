@@ -26,7 +26,7 @@ import taes.project.dressyourself.interfaces.OnDrawerLayoutMenuListener;
 
 public class DressYourSelfActivity extends FloatingButtonActivity {
 
-    private Toolbar toolbar;
+    public Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawer;
     private ConjuntosFragment conjuntosFragment;
