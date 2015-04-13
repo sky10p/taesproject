@@ -15,7 +15,7 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-import taes.project.dressyourself.CameraActivity;
+import taes.project.dressyourself.activities.CameraActivity;
 import taes.project.dressyourself.R;
 import taes.project.dressyourself.classes.Categoria;
 

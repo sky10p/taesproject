@@ -1,4 +1,4 @@
-package taes.project.dressyourself;
+package taes.project.dressyourself.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,12 +25,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import taes.project.dressyourself.R;
 import taes.project.dressyourself.adapter.AdapterCategoria;
 import taes.project.dressyourself.classes.Categoria;
-//import taes.project.dressyourself.fragments.CategoryPhotoDialogFragment;
+import taes.project.dressyourself.fragments.CategoryPhotoDialogFragment;
 
 
-public class CameraActivity extends ActionBarActivity /*implements CategoryPhotoDialogFragment.CategoriaDialogListener */{
+public class CameraActivity extends ActionBarActivity implements CategoryPhotoDialogFragment.CategoriaDialogListener {
 
     //Entero que especifica la cantidad de fotos a tirar
     static final int REQUEST_IMAGE_CAPTURE = 0;
@@ -89,11 +90,11 @@ public class CameraActivity extends ActionBarActivity /*implements CategoryPhoto
         categorias = Categoria.getAllByUser(ParseUser.getCurrentUser(), new AdapterCategoria.AdapterCategoriaCallback() {
             @Override
             public void onDataLoaded() {
-                /*CategoryPhotoDialogFragment dialog = new CategoryPhotoDialogFragment();
+                CategoryPhotoDialogFragment dialog = new CategoryPhotoDialogFragment();
                 dialog.setCategorias(categorias);
                 dialog.setCancelable(false);
                 dialog.setDialogListener(CameraActivity.this);
-                dialog.show(getFragmentManager(), "Categorias dialog");*/
+                dialog.show(getFragmentManager(), "Categorias dialog");
             }
         });
     }
@@ -263,8 +264,8 @@ public class CameraActivity extends ActionBarActivity /*implements CategoryPhoto
         }
     }
 
-    /*@Override
+    @Override
     public void onDialogAccept(String categoria) {
         dispatchTakePictureIntent(categoria);
-    }*/
+    }
 }

@@ -1,4 +1,4 @@
-package taes.project.dressyourself.activities;
+package taes.project.dressyourself.listeners;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -8,9 +8,9 @@ import taes.project.dressyourself.interfaces.OnBackPressedListener;
 /**
  * Created by isma on 13/04/15.
  */
-public class BaseOnBackPressed implements OnBackPressedListener {
+public class BaseOnBackPressedListener implements OnBackPressedListener {
     private final FragmentActivity activity;
-    public BaseOnBackPressed(FragmentActivity activity)
+    public BaseOnBackPressedListener(FragmentActivity activity)
     {
         this.activity = activity;
     }

@@ -5,14 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,7 +26,7 @@ import com.parse.ParseObject;
 
 import java.util.List;
 
-import taes.project.dressyourself.DressYourSelfActivity;
+import taes.project.dressyourself.activities.DressYourSelfActivity;
 import taes.project.dressyourself.R;
 import taes.project.dressyourself.adapter.AdapterCategoria;
 import taes.project.dressyourself.classes.Categoria;
@@ -36,7 +34,6 @@ import taes.project.dressyourself.interfaces.OnBackPressedListener;
 import taes.project.dressyourself.utils.DividerItemDecoration;
 
 import taes.project.dressyourself.listeners.RecyclerItemClickListener;
-import taes.project.dressyourself.utils.DividerItemDecoration;
 
 public class CategoriasFragment extends Fragment implements InsertarCategoriaDialogFragment.InsertarCategoriaDialogListener {
 

@@ -1,4 +1,4 @@
-package taes.project.dressyourself;
+package taes.project.dressyourself.activities;
 
 
 import android.content.Intent;
@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.parse.ParseUser;
 
-import taes.project.dressyourself.activities.FloatingButtonActivity;
+import taes.project.dressyourself.R;
 import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
 import taes.project.dressyourself.fragments.CategoriasFragment;
 import taes.project.dressyourself.fragments.ConjuntosFragment;
