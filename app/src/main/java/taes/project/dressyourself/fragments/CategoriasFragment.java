@@ -1,7 +1,5 @@
 package taes.project.dressyourself.fragments;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -22,15 +20,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.support.v7.widget.Toolbar;
 
 import com.parse.DeleteCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
 
-import java.util.ArrayList;
+import com.parse.ParseObject;
+
 import java.util.List;
 
 import taes.project.dressyourself.DressYourSelfActivity;
@@ -39,7 +34,9 @@ import taes.project.dressyourself.adapter.AdapterCategoria;
 import taes.project.dressyourself.classes.Categoria;
 import taes.project.dressyourself.interfaces.OnBackPressedListener;
 import taes.project.dressyourself.utils.DividerItemDecoration;
+
 import taes.project.dressyourself.listeners.RecyclerItemClickListener;
+import taes.project.dressyourself.utils.DividerItemDecoration;
 
 public class CategoriasFragment extends Fragment implements InsertarCategoriaDialogFragment.InsertarCategoriaDialogListener {
 

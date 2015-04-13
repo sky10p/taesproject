@@ -23,9 +23,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import taes.project.dressyourself.adapter.AdapterCategoria;
+import taes.project.dressyourself.classes.Categoria;
+import taes.project.dressyourself.fragments.CategoryPhotoDialogFragment;
 
 
-public class CameraActivity extends ActionBarActivity {
+public class CameraActivity extends ActionBarActivity implements CategoryPhotoDialogFragment.CategoriaDialogListener {
 
     //Entero que especifica la cantidad de fotos a tirar
     static final int REQUEST_IMAGE_CAPTURE = 0;
@@ -34,13 +39,24 @@ public class CameraActivity extends ActionBarActivity {
     
     private String RESIZE = "resize";
 
+    //Lista de categorias a mostrar
+    List<Categoria> categorias = null;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.camera_activity);
-        dispatchTakePictureIntent();
+        addPhoto();
     }
 
 
@@ -67,12 +83,31 @@ public class CameraActivity extends ActionBarActivity {
     }
 
 
+
+    public void addPhoto() {
+
+        categorias = Categoria.getAllByUser(ParseUser.getCurrentUser(), new AdapterCategoria.AdapterCategoriaCallback() {
+            @Override
+            public void onDataLoaded() {
+                CategoryPhotoDialogFragment dialog = new CategoryPhotoDialogFragment();
+                dialog.setCategorias(categorias);
+                dialog.setCancelable(false);
+                dialog.setDialogListener(CameraActivity.this);
+                dialog.show(getFragmentManager(), "Categorias dialog");
+            }
+        });
+    }
+
+
+
+
+
     //Crea una imagen unica en memoria destino  y la devuelve
-    private File createImageFile() throws IOException {
+    private File createImageFile(String category) throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES +"/"+ParseUser.getCurrentUser().getUsername());
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES +"/"+ParseUser.getCurrentUser().getUsername()+"/"+category);
         if (!storageDir.exists()) {
             storageDir.mkdir();
         }
@@ -87,7 +122,7 @@ public class CameraActivity extends ActionBarActivity {
         return image;
     }
     //invoca a la app camara y captura la imagen
-    private void dispatchTakePictureIntent() {
+    public void dispatchTakePictureIntent(String category) {
         //Si no existe algun softare para camara devuelve un mesnsaje denegando
         Context context = CameraActivity.this;
         PackageManager packageManager = context.getPackageManager();
@@ -102,16 +137,20 @@ public class CameraActivity extends ActionBarActivity {
             // Create the File where the photo should go
             File photoFile = null;
             try {
-                photoFile = createImageFile();
+                photoFile = createImageFile(category);
             } catch (IOException ex) {
                 // Error occurred while creating the File
                 Log.e("dispatchTakePicture", "dispatchTakePictureIntent: Error creando imagen: " + ex.getMessage());
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
+
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                         Uri.fromFile(photoFile));
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
+            else{
+                checkFile();
             }
         }
     }
@@ -132,7 +171,9 @@ public class CameraActivity extends ActionBarActivity {
     }
 
     public void setPic() {
-        
+        //carga el layout correspondiente
+        setContentView(R.layout.camera_activity);
+        checkFile();
         ImageView imageView = (ImageView) findViewById(R.id.imageView1);        
         Bitmap bMap = getBitmap();
         imageView.setImageBitmap(bMap);
@@ -221,47 +262,9 @@ public class CameraActivity extends ActionBarActivity {
             }
         }
     }
-/*
-    public Bitmap decodeSampledBitmapFromMemory(int reqWidth, int reqHeight) {
 
-        // First decode with inJustDecodeBounds=true to check dimensions
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        
-        
-        BitmapFactory.decodeFile(mCurrentPhotoPath);
-            // Calculate inSampleSize
-            options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-
-            // Decode bitmap with inSampleSize set
-            options.inJustDecodeBounds = false;
-            return BitmapFactory.decodeFile(mCurrentPhotoPath);
-
-       
+    @Override
+    public void onDialogAccept(String categoria) {
+        dispatchTakePictureIntent(categoria);
     }
-    
-      public static int calculateInSampleSize(
-            BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        // Raw height and width of image
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-
-        if (height > reqHeight || width > reqWidth) {
-
-            final int halfHeight = height / 2;
-            final int halfWidth = width / 2;
-
-            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-            // height and width larger than the requested height and width.
-            while ((halfHeight / inSampleSize) > reqHeight
-                    && (halfWidth / inSampleSize) > reqWidth) {
-                inSampleSize *= 2;
-            }
-        }
-
-        return inSampleSize;
-    }
-
-*/
 }

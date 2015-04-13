@@ -3,12 +3,11 @@ package taes.project.dressyourself;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.parse.Parse;
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseUser;
 
@@ -29,6 +28,7 @@ public class MainActivity extends ActionBarActivity {
             Intent intent = new Intent(this,DressYourSelfActivity.class);
             startActivity(intent);
             finish();
+
         }
     }
 

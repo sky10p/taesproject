@@ -10,11 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-
-import android.widget.TextView;
 
 import taes.project.dressyourself.DressYourSelfActivity;
 import taes.project.dressyourself.R;
