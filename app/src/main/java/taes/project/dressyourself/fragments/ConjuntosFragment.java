@@ -22,8 +22,6 @@ public class ConjuntosFragment extends Fragment {
     private RecyclerView.LayoutManager manager;
     private Context contexto;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.list_conjuntos,container,false);

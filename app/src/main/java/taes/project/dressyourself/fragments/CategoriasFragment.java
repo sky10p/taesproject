@@ -7,12 +7,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,9 +33,11 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
+import taes.project.dressyourself.DressYourSelfActivity;
 import taes.project.dressyourself.R;
 import taes.project.dressyourself.adapter.AdapterCategoria;
 import taes.project.dressyourself.classes.Categoria;
+import taes.project.dressyourself.interfaces.OnBackPressedListener;
 import taes.project.dressyourself.utils.DividerItemDecoration;
 import taes.project.dressyourself.listeners.RecyclerItemClickListener;
 
@@ -50,6 +54,16 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.list_categorias,container,false);
         context = getActivity();
+        ((DressYourSelfActivity) context).setOnBackPressedListener(new OnBackPressedListener() {
+            @Override
+            public void onBack() {
+                if(actionMode==null){
+                    ((DressYourSelfActivity) context).setOnBackPressedListener(null);
+                }else{
+                    actionMode.finish();
+                }
+            }
+        });
         listaCategorias= (RecyclerView) v.findViewById(R.id.listaCategorias);
         listaCategorias.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));
         listaCategorias.setHasFixedSize(true);
@@ -82,7 +96,6 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
                 {
                     ActionBarActivity activity = (ActionBarActivity) getActivity();
                     actionMode = activity.startSupportActionMode(mActionModeCallback);
-
                 }
             }
         }));
@@ -159,5 +172,4 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
             mode = null;
         }
     };
-
-    }
+}
