@@ -108,6 +108,7 @@ public class DressYourSelfActivity extends FloatingButtonActivity {
             }
         });
 
+        if(savedInstanceState == null)
         getSupportFragmentManager().beginTransaction().add(R.id.content_frame,conjuntosFragment).commit();
 
         onClickPhotoAndVoteButton();
@@ -156,7 +157,7 @@ public class DressYourSelfActivity extends FloatingButtonActivity {
        
     }
 
-
+    // Al hacer click en icono de voto
     public void onClickVoteButton() {
 
         findViewById(R.id.action_vote).setOnClickListener(new View.OnClickListener() {
