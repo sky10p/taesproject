@@ -42,7 +42,7 @@ public class CategoryPhotoDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle bundle) {
-
+        setRetainInstance(true);
         AlertDialog.Builder builder;
         if(categorias.size() != 0) {
             builder = builderList();
