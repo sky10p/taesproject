@@ -1,26 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Dress Yourself</string>
+    <string name="app_name">DressYourself</string>
     <string name="title_activity_main">DressYourself!</string>
     <string name="action_settings">Configuración</string>
     <string name="menu_open_drawer">Abrir</string>
     <string name="menu_close_drawer">Cerrar</string>
     <string name="contentimg">imagen conjunto de ropa</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="signup">Registrar</string>
-    <string name="userName">Nombre de Usuario</string>
+
+    <string name="username">Usuario</string>
     <string name="password">Contraseña</string>
     <string name="email">Correo electrónico</string>
-    <string name="fullName">Nombre Completo</string>
+    <string name="fullname">Nombre Completo</string>
     <string name="login">Iniciar Sesión</string>
+    <string name="signup">Registrarse</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="unirse">Unirse</string>
+    <string name="forgot_password">¿Ha olvidado su contraseña? Pulse aquí para recuperarla</string>
+    <string name="wrong_user_password">Usuario y/o contraseña incorrectos</string>
+    <string name="email_not_verified">El usuario necesita verificar su correo electrónico</string>
+    <string name="success_signup">Registro completado. Se le ha enviado un e-mail de verificación, revise su correo.</string>
+    <string name="insertar">Insertar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="nombre_categoria">Nombre categoría</string>
+    <string name="nueva_categoria">Nueva categoria</string>
+
     <string name="complete_register">Completar Registro</string>
     <string name="splash_description">Vistete con ayuda</string>
-
+    <string name="foto">Foto</string>
+    <string name="votación">Votación</string>
+    <string name="picture">Foto</string>
+    <string name="description_info">Información</string>
+    <string name="btnIntend">Take (big) Picture</string>
+    <string name="btnIntendS">Take (small) Picture</string>
+    <string name="btnIntendV">Take Video</string>
+    <string name="cannot">Cannot</string>
+    <string name="album_name">DressYourself</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_publicacion">PublicacionActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_armario">ArmarioActivity</string>
+    <string name="title_activity_camera_photo">CameraPhotoActivity</string>
+    <string name="title_activity_camera">CameraActivity</string>
 
 </resources>

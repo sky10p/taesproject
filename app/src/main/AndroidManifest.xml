@@ -2,25 +2,31 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="taes.project.dressyourself" >
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".ParseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_dress_yourself"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true">
         <activity
-            android:name=".DressYourSelfActivity"
+            android:name=".activities.DressYourSelfActivity"
             android:label="@string/title_activity_main" >
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" >
-        </activity>
-        <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,17 +34,30 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.ScreenSlideActivity"
+            android:label="ScreenSlideActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
-            android:name=".PublicacionActivity"
+            android:name=".activities.PublicacionActivity"
             android:label="@string/title_activity_publicacion" >
         </activity>
         <activity
             android:name=".ArmarioActivity"
             android:label="@string/title_activity_armario"
-            android:parentActivityName=".DressYourSelfActivity" >
+            android:parentActivityName=".activities.DressYourSelfActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="taes.project.dressyourself.DressYourSelfActivity" />
+                android:value=".activities.DressYourSelfActivity" />
+        </activity>
+        <activity
+            android:name=".activities.CameraActivity"
+            android:label="@string/title_activity_camera"
+            android:parentActivityName=".activities.DressYourSelfActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.DressYourSelfActivity" />
         </activity>
     </application>
 
