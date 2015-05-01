@@ -1,4 +1,4 @@
-package taes.project.dressyourself;
+package taes.project.dressyourself.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseUser;
+
+import taes.project.dressyourself.R;
 
 
 public class MainActivity extends ActionBarActivity {

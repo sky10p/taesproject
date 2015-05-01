@@ -15,7 +15,7 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-import taes.project.dressyourself.CameraActivity;
+import taes.project.dressyourself.activities.CameraActivity;
 import taes.project.dressyourself.R;
 import taes.project.dressyourself.classes.Categoria;
 
@@ -42,7 +42,7 @@ public class CategoryPhotoDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle bundle) {
-
+        setRetainInstance(true);
         AlertDialog.Builder builder;
         if(categorias.size() != 0) {
             builder = builderList();

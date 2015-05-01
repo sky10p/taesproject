@@ -1,4 +1,4 @@
-package taes.project.dressyourself;
+package taes.project.dressyourself.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarActivity;
 
 import com.viewpagerindicator.LinePageIndicator;
 
+import taes.project.dressyourself.R;
 import taes.project.dressyourself.fragments.LoginSignupFragment;
 import taes.project.dressyourself.fragments.SlidePageFragment;
 import taes.project.dressyourself.transformers.DepthPageTransformer;

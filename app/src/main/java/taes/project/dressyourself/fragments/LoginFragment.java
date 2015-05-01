@@ -16,7 +16,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
-import taes.project.dressyourself.DressYourSelfActivity;
+import taes.project.dressyourself.activities.DressYourSelfActivity;
 import taes.project.dressyourself.R;
 
 
