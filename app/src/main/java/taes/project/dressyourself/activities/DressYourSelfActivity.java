@@ -19,6 +19,7 @@ import com.parse.ParseUser;
 
 import taes.project.dressyourself.R;
 import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
+import taes.project.dressyourself.fragments.AmigosFragment;
 import taes.project.dressyourself.fragments.CategoriasFragment;
 import taes.project.dressyourself.fragments.ConjuntosFragment;
 import taes.project.dressyourself.fragments.FloatingButtonFragment;
@@ -77,7 +78,8 @@ public class DressYourSelfActivity extends ActionBarActivity {
 
             @Override
             public void onClicAmigos() {
-
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new AmigosFragment()).addToBackStack(null).commit();
+                drawerLayout.closeDrawers();
             }
 
             @Override
