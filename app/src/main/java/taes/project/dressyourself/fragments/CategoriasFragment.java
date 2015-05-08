@@ -18,23 +18,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
-
 import com.parse.DeleteCallback;
 import com.parse.ParseException;
-
 import com.parse.ParseObject;
 
 import java.util.List;
 
-import taes.project.dressyourself.activities.DressYourSelfActivity;
 import taes.project.dressyourself.R;
 import taes.project.dressyourself.adapter.AdapterCategoria;
 import taes.project.dressyourself.classes.Categoria;
-import taes.project.dressyourself.interfaces.OnBackPressedListener;
-import taes.project.dressyourself.utils.DividerItemDecoration;
-
 import taes.project.dressyourself.listeners.RecyclerItemClickListener;
+import taes.project.dressyourself.utils.DividerItemDecoration;
 
 public class CategoriasFragment extends Fragment implements InsertarCategoriaDialogFragment.InsertarCategoriaDialogListener {
 
@@ -46,20 +40,9 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
     private ActionMode actionMode;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.list_categorias,container,false);
         context = getActivity();
-        ((DressYourSelfActivity) context).setOnBackPressedListener(new OnBackPressedListener() {
-            @Override
-            public void onBack() {
-                if(actionMode==null){
-                    ((DressYourSelfActivity) context).setOnBackPressedListener(null);
-                    context.onBackPressed();
-                }else{
-                    actionMode.finish();
-                }
-            }
-        });
         listaCategorias= (RecyclerView) v.findViewById(R.id.listaCategorias);
         listaCategorias.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));
         listaCategorias.setHasFixedSize(true);
