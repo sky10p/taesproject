@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ViewTreeObserver;
 
 
@@ -22,7 +23,7 @@ import taes.project.dressyourself.transformers.DepthPageTransformer;
 /**
  * Created by isma on 1/04/15.
  */
-public class ScreenSlideActivity extends ActionBarActivity {
+public class ScreenSlideActivity extends AppCompatActivity {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */

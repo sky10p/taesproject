@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +32,7 @@ import taes.project.dressyourself.classes.Categoria;
 import taes.project.dressyourself.fragments.CategoryPhotoDialogFragment;
 
 
-public class CameraActivity extends ActionBarActivity implements CategoryPhotoDialogFragment.CategoriaDialogListener {
+public class CameraActivity extends AppCompatActivity implements CategoryPhotoDialogFragment.CategoriaDialogListener {
 
     //Entero que especifica la cantidad de fotos a tirar
     static final int REQUEST_IMAGE_CAPTURE = 0;

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.parse.ParseException;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -33,7 +34,13 @@ public class AmigosAdapter  extends RecyclerView.Adapter<AmigosAdapter.ViewHolde
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        try {
+            amigos.get(position).fetchIfNeeded();
             holder.amigo.setText(amigos.get(position).getUsername());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

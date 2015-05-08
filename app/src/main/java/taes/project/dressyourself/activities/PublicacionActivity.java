@@ -2,13 +2,14 @@ package taes.project.dressyourself.activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import taes.project.dressyourself.R;
 
 
-public class PublicacionActivity extends ActionBarActivity {
+public class PublicacionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
