@@ -60,7 +60,7 @@
                 android:value=".activities.DressYourSelfActivity" />
         </activity>
         <activity
-            android:name=".activities.SearchAmigosActivity"
+            android:name=".fragments.SearchAmigosFragment"
             android:label="@string/title_activity_search_amigos" >
         </activity>
     </application>

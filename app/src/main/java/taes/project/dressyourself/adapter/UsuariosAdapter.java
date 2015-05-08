@@ -33,6 +33,11 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
 
     }
 
+    public void setUsuarios(List<ParseUser> list){
+        usuarios= (ArrayList<ParseUser>) list;
+        notifyDataSetChanged();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_user_found,parent,false);
@@ -50,6 +55,9 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
         if(containsUser(amigos, usuarios.get(position))){
             holder.btnSeguir.setText("Siguiendo");
             holder.btnSeguir.setEnabled(false);
+        }else {
+            holder.btnSeguir.setText("Seguir");
+            holder.btnSeguir.setEnabled(true);
         }
 
 

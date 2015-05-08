@@ -14,22 +14,15 @@
         android:orientation="vertical">
 
     <include layout="@layout/toolbar"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+
 
             <FrameLayout
                 android:id="@+id/content_frame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-           <fragment
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                class="taes.project.dressyourself.fragments.FloatingButtonFragment"
-                android:id="@+id/floatingButtonFragment"
-                tools:layout="@layout/fragment_floating_button" />
-            </RelativeLayout>
+
+
 
 
     </LinearLayout>

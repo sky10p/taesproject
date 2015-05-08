@@ -10,19 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.parse.FindCallback;
 import com.parse.GetCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import taes.project.dressyourself.R;
-import taes.project.dressyourself.activities.SearchAmigosActivity;
 import taes.project.dressyourself.adapter.AmigosAdapter;
 
 /**
@@ -40,14 +35,16 @@ public class AmigosFragment extends Fragment {
         lstAmigos = (RecyclerView) v.findViewById(R.id.lstAmigos);
         lstAmigos.setLayoutManager(new LinearLayoutManager(getActivity()));
         btnInsertarAmigo = (Button) v.findViewById(R.id.btnInsertarAmigo);
-
+        final AmigosAdapter adapter=new AmigosAdapter(new ArrayList<ParseUser>());
+        lstAmigos.setAdapter(adapter);
         ParseUser user=ParseUser.getCurrentUser();
 
         user.fetchInBackground(new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject parseObject, ParseException e) {
                 if(parseObject.has("amigos")){
-                    lstAmigos.setAdapter(new AmigosAdapter((ArrayList<ParseUser>) parseObject.get("amigos")));
+                    adapter.setAmigos((ArrayList<ParseUser>) parseObject.get("amigos"));
+
                 }
 
             }
@@ -56,7 +53,9 @@ public class AmigosFragment extends Fragment {
         btnInsertarAmigo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),SearchAmigosActivity.class));
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,new SearchAmigosFragment()).addToBackStack(null)
+                        .commit();
+
             }
         });
 

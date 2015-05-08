@@ -18,7 +18,7 @@ import taes.project.dressyourself.R;
  */
 public class AmigosAdapter  extends RecyclerView.Adapter<AmigosAdapter.ViewHolder>{
 
-    private final ArrayList<ParseUser> amigos;
+    private ArrayList<ParseUser> amigos;
 
     public AmigosAdapter(ArrayList<ParseUser> amigos){
         this.amigos=amigos;
@@ -46,6 +46,11 @@ public class AmigosAdapter  extends RecyclerView.Adapter<AmigosAdapter.ViewHolde
     @Override
     public int getItemCount() {
         return amigos.size();
+    }
+
+    public void setAmigos(ArrayList<ParseUser> amigos) {
+        this.amigos = amigos;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
