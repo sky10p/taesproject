@@ -1,5 +1,7 @@
 package taes.project.dressyourself.activities;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,6 +9,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.view.ViewTreeObserver;
 
 
 import com.viewpagerindicator.LinePageIndicator;
@@ -19,7 +23,7 @@ import taes.project.dressyourself.transformers.DepthPageTransformer;
 /**
  * Created by isma on 1/04/15.
  */
-public class ScreenSlideActivity extends ActionBarActivity {
+public class ScreenSlideActivity extends AppCompatActivity {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
@@ -42,6 +46,17 @@ public class ScreenSlideActivity extends ActionBarActivity {
         setContentView(R.layout.activity_screen_slide);
 
         // Instantiate a ViewPager and a PagerAdapter.
+
+
+        /*postponeEnterTransition();
+        mPager.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+
+            public boolean onPreDraw() {
+                mPager.getViewTreeObserver().removeOnPreDrawListener(this);
+                startPostponedEnterTransition();
+                return true;
+            }
+        });*/
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
@@ -72,6 +87,9 @@ public class ScreenSlideActivity extends ActionBarActivity {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
         }
+
+
+
 
         @Override
         public Fragment getItem(int position) {

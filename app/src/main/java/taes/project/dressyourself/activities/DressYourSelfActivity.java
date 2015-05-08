@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +20,7 @@ import com.parse.ParseUser;
 
 import taes.project.dressyourself.R;
 import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
+import taes.project.dressyourself.fragments.AmigosFragment;
 import taes.project.dressyourself.fragments.CategoriasFragment;
 import taes.project.dressyourself.fragments.ConjuntosFragment;
 import taes.project.dressyourself.fragments.FloatingButtonFragment;
@@ -26,7 +28,7 @@ import taes.project.dressyourself.interfaces.OnBackPressedListener;
 import taes.project.dressyourself.interfaces.OnDrawerLayoutMenuListener;
 
 
-public class DressYourSelfActivity extends ActionBarActivity {
+public class DressYourSelfActivity extends AppCompatActivity {
 
     public Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -77,7 +79,8 @@ public class DressYourSelfActivity extends ActionBarActivity {
 
             @Override
             public void onClicAmigos() {
-
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new AmigosFragment()).addToBackStack(null).commit();
+                drawerLayout.closeDrawers();
             }
 
             @Override

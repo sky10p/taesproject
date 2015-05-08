@@ -18,6 +18,9 @@ public class LoginSignupFragment extends Fragment {
     private Button ingresarBtn;
     private Button unirseBtn;
 
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

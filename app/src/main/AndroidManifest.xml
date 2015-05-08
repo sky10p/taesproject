@@ -16,11 +16,11 @@
     <application
         android:name=".ParseApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_dress_yourself"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:hardwareAccelerated="false"
-        android:largeHeap="true">
+        android:largeHeap="true"
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".activities.DressYourSelfActivity"
             android:label="@string/title_activity_main" >
@@ -34,10 +34,10 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ScreenSlideActivity"
+        <activity
+            android:name=".activities.ScreenSlideActivity"
             android:label="ScreenSlideActivity"
-            android:screenOrientation="portrait">
-
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.PublicacionActivity"
@@ -58,6 +58,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DressYourSelfActivity" />
+        </activity>
+        <activity
+            android:name=".activities.SearchAmigosActivity"
+            android:label="@string/title_activity_search_amigos" >
         </activity>
     </application>
 
