@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -43,6 +44,14 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
     private FragmentActivity context;
     private Button insertarBtn;
     private ActionMode actionMode;
+    FloatingButtonAddFragment buttonAdd;
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getFragmentManager().beginTransaction().remove(buttonAdd).commit();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,6 +66,15 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
                 }else{
                     actionMode.finish();
                 }
+            }
+        });
+        buttonAdd=new FloatingButtonAddFragment();
+        getFragmentManager().beginTransaction().replace(R.id.floatingButtonFragment,buttonAdd).commit();
+        ((DressYourSelfActivity)getActivity()).setFloatingButton(buttonAdd);
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertarCategoriaDialog();
             }
         });
         listaCategorias= (RecyclerView) v.findViewById(R.id.listaCategorias);
@@ -89,7 +107,7 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
                 adapter.selected(position);
                 if(actionMode==null)
                 {
-                    ActionBarActivity activity = (ActionBarActivity) getActivity();
+                    AppCompatActivity activity = (AppCompatActivity) getActivity();
                     actionMode = activity.startSupportActionMode(mActionModeCallback);
                 }
             }

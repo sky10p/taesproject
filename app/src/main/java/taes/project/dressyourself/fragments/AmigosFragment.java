@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import taes.project.dressyourself.R;
+import taes.project.dressyourself.activities.DressYourSelfActivity;
 import taes.project.dressyourself.activities.SearchAmigosActivity;
 import taes.project.dressyourself.adapter.AmigosAdapter;
 
@@ -33,6 +34,7 @@ public class AmigosFragment extends Fragment {
 
     private RecyclerView lstAmigos;
     private Button btnInsertarAmigo;
+    private FloatingButtonAddFragment buttonAdd;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +42,16 @@ public class AmigosFragment extends Fragment {
         lstAmigos = (RecyclerView) v.findViewById(R.id.lstAmigos);
         lstAmigos.setLayoutManager(new LinearLayoutManager(getActivity()));
         btnInsertarAmigo = (Button) v.findViewById(R.id.btnInsertarAmigo);
+
+        buttonAdd=new FloatingButtonAddFragment();
+        getFragmentManager().beginTransaction().replace(R.id.floatingButtonFragment,buttonAdd).commit();
+        ((DressYourSelfActivity)getActivity()).setFloatingButton(buttonAdd);
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchFriends();
+            }
+        });
 
         ParseUser user=ParseUser.getCurrentUser();
 
@@ -56,7 +68,7 @@ public class AmigosFragment extends Fragment {
         btnInsertarAmigo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),SearchAmigosActivity.class));
+                searchFriends();
             }
         });
 
@@ -66,5 +78,9 @@ public class AmigosFragment extends Fragment {
         return v;
 
 
+    }
+
+    private void searchFriends() {
+        startActivity(new Intent(getActivity(),SearchAmigosActivity.class));
     }
 }
