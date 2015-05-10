@@ -6,16 +6,7 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72f236e6-6c0c-4d0e-a392-11af47df401c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/pablo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/taes/project/dressyourself/adapter/AdapterGaleria.java" afterPath="$PROJECT_DIR$/app/src/main/java/taes/project/dressyourself/adapter/AdapterGaleria.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/taes/project/dressyourself/fragments/CategoriasFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/taes/project/dressyourself/fragments/CategoriasFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/taes/project/dressyourself/fragments/GalleryPhotosCategory.java" afterPath="$PROJECT_DIR$/app/src/main/java/taes/project/dressyourself/fragments/GalleryPhotosCategory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/photo_card_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/photo_card_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/recycler_photo_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/recycler_photo_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="72f236e6-6c0c-4d0e-a392-11af47df401c" name="Default" comment="" />
     <ignored path="taes.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
