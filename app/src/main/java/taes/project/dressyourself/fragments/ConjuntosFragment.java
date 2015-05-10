@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import taes.project.dressyourself.R;
+import taes.project.dressyourself.activities.DressYourSelfActivity;
 import taes.project.dressyourself.adapter.AdapterConjunto;
 
 /**
@@ -21,10 +22,14 @@ public class ConjuntosFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
     private Context contexto;
+    FloatingButtonCameraFragment fragmentCamera;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.list_conjuntos,container,false);
+        fragmentCamera=new FloatingButtonCameraFragment();
+        getFragmentManager().beginTransaction().replace(R.id.floatingButtonFragment,fragmentCamera).commit();
+        ((DressYourSelfActivity)getActivity()).setFloatingButton(fragmentCamera);
         lstConjuntos= (RecyclerView) v.findViewById(R.id.lstConjuntos);
         manager=new LinearLayoutManager(getActivity());
         lstConjuntos.setLayoutManager(manager);

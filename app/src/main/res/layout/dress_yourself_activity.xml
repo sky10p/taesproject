@@ -23,12 +23,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-           <fragment
+           <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                class="taes.project.dressyourself.fragments.FloatingButtonFragment"
+
                 android:id="@+id/floatingButtonFragment"
-                tools:layout="@layout/fragment_floating_button" />
+                />
             </RelativeLayout>
 
 

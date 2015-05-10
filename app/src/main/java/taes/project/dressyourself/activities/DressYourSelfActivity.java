@@ -4,7 +4,6 @@ package taes.project.dressyourself.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,8 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.parse.ParseUser;
 
@@ -23,7 +20,7 @@ import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
 import taes.project.dressyourself.fragments.AmigosFragment;
 import taes.project.dressyourself.fragments.CategoriasFragment;
 import taes.project.dressyourself.fragments.ConjuntosFragment;
-import taes.project.dressyourself.fragments.FloatingButtonFragment;
+import taes.project.dressyourself.fragments.FloatingButtonCameraFragment;
 import taes.project.dressyourself.interfaces.OnBackPressedListener;
 import taes.project.dressyourself.interfaces.OnDrawerLayoutMenuListener;
 
@@ -35,7 +32,7 @@ public class DressYourSelfActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawer;
     private ConjuntosFragment conjuntosFragment;
     private RecyclerView listaDrawer;
-    public FloatingButtonFragment floatingButton;
+    public FloatingButtonCameraFragment floatingButton;
 
     private OnBackPressedListener onBackPressedListener;
 
@@ -56,7 +53,9 @@ public class DressYourSelfActivity extends AppCompatActivity {
         }
     }
 
-
+    public void setFloatingButton(FloatingButtonCameraFragment fragment){
+        this.floatingButton=fragment;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,19 +66,20 @@ public class DressYourSelfActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         listaDrawer= (RecyclerView) findViewById(R.id.left_drawer);
         listaDrawer.setLayoutManager(new LinearLayoutManager(this));
-        floatingButton= (FloatingButtonFragment) getSupportFragmentManager().findFragmentById(R.id.floatingButtonFragment);
+
+
         AdapterDrawerNavigation adapter=new AdapterDrawerNavigation(this);
 
         adapter.setOnDrawerLayoutMenuListener(new OnDrawerLayoutMenuListener() {
             @Override
             public void onClicArmario() {
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new CategoriasFragment()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new CategoriasFragment()).addToBackStack(null).commit();
                 drawerLayout.closeDrawers();
             }
 
             @Override
             public void onClicAmigos() {
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new AmigosFragment()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AmigosFragment()).addToBackStack(null).commit();
                 drawerLayout.closeDrawers();
             }
 
@@ -96,7 +96,7 @@ public class DressYourSelfActivity extends AppCompatActivity {
             @Override
             public void onClicCerrarSesion() {
                 ParseUser.logOut();
-                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -122,7 +122,7 @@ public class DressYourSelfActivity extends AppCompatActivity {
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().add(R.id.content_frame,conjuntosFragment).commit();
         }
-        onClickPhotoAndVoteButton();
+
     }
 
     @Override
@@ -148,36 +148,6 @@ public class DressYourSelfActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     
-    public void onClickPhotoAndVoteButton() {
-        onClickPhotoButton();
-        onClickVoteButton();
-    }
 
-   
-    // Al hacer click en icono de foto
-    public void onClickPhotoButton() {        
-            
-        findViewById(R.id.action_photo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(DressYourSelfActivity.this, CameraActivity.class);
-                startActivity(intent);
-            }
-        });  
-       
-    }
-
-    // Al hacer click en icono de voto
-    public void onClickVoteButton() {
-
-        findViewById(R.id.action_vote).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(DressYourSelfActivity.this, "Clicked Vote Button", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
 
 }
