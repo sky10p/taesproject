@@ -1,21 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/recyclerPhotoView"
+    android:layout_marginTop="16dp"
+    android:scrollbars="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#333333"
-        android:text="Caption"
-        android:id="@+id/textRecyclerPhotoView"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="4dp" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerPhotoView"
-        android:scrollbars="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
-</LinearLayout>
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

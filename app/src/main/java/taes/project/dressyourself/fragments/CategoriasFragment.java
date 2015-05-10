@@ -44,11 +44,6 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
     FloatingButtonAddFragment buttonAdd;
 
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        getFragmentManager().beginTransaction().remove(buttonAdd).commit();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {

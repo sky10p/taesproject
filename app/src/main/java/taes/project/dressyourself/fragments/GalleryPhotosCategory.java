@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,6 +21,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import taes.project.dressyourself.R;
+import taes.project.dressyourself.activities.DressYourSelfActivity;
 import taes.project.dressyourself.adapter.AdapterGaleria;
 import taes.project.dressyourself.classes.Foto;
 
@@ -30,7 +32,7 @@ public class GalleryPhotosCategory extends  android.support.v4.app.Fragment {
 
 
 
-    private TextView textView;
+
     private static String TAG = "galleryPhotosCategory";
     private String mCurrentCategoryPath;
     AsyncTaskLoadFiles myAsyncTaskLoadFiles;
@@ -39,6 +41,7 @@ public class GalleryPhotosCategory extends  android.support.v4.app.Fragment {
     private RecyclerView.LayoutManager mLayoutManagerFotoCPorCategoria;
     AdapterGaleria mAdapter;
     ArrayList<Foto> mPhotoAlbum;
+    private FloatingButtonCameraFragment fragmentCamera;
 
     public GalleryPhotosCategory() {
         // Required empty public constructor
@@ -46,13 +49,24 @@ public class GalleryPhotosCategory extends  android.support.v4.app.Fragment {
 
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ((DressYourSelfActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_activity_main);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d(TAG, "Creado el view");
+        String categoria=this.getArguments().getString("categoria");
         mCurrentCategoryPath = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES +"/"+ParseUser.getCurrentUser().getUsername()+"/"+this.getArguments().getString("categoria")).getAbsolutePath();
         View v=inflater.inflate(R.layout.recycler_photo_view, container, false);
-        textView = (TextView) v.findViewById(R.id.textRecyclerPhotoView);
-        textView.setText(this.getArguments().getString("categoria"));
+
+        fragmentCamera=new FloatingButtonCameraFragment();
+        getFragmentManager().beginTransaction().replace(R.id.floatingButtonFragment,fragmentCamera).commit();
+        ((DressYourSelfActivity)getActivity()).setFloatingButton(fragmentCamera);
+
+        ((DressYourSelfActivity)getActivity()).getSupportActionBar().setTitle(categoria);
         // Prepare the data source:
         mPhotoAlbum = listaFotosPorCategoria();
         // Instantiate the adapter and pass in its data source:
@@ -64,7 +78,7 @@ public class GalleryPhotosCategory extends  android.support.v4.app.Fragment {
         Log.d(TAG, "Despues del gridview");
         // Plug the adapter into the RecyclerView:
         listarFotoPorCategoria.setAdapter(mAdapter);
-        mLayoutManagerFotoCPorCategoria = new LinearLayoutManager(getActivity());
+        mLayoutManagerFotoCPorCategoria = new GridLayoutManager(getActivity(),3);
         listarFotoPorCategoria.setLayoutManager(mLayoutManagerFotoCPorCategoria);
 
         return v;
