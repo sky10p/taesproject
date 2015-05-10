@@ -1,5 +1,6 @@
 package taes.project.dressyourself.adapter;
 
+import android.provider.MediaStore;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,8 +39,9 @@ public class AdapterGaleria extends RecyclerView.Adapter<AdapterGaleria.FotoView
 
     @Override
     public void onBindViewHolder(FotoViewHolder personViewHolder, int i) {
-        personViewHolder.fotoName.setText(fotos.get(i).getTitle());
+
         personViewHolder.fotoPhoto.setImageBitmap(fotos.get(i).getImage());
+
     }
 
   /*  @Override
@@ -56,14 +58,14 @@ public class AdapterGaleria extends RecyclerView.Adapter<AdapterGaleria.FotoView
     }
 
     public static class FotoViewHolder extends RecyclerView.ViewHolder {
-        CardView cv;
-        TextView fotoName;
+
+
         ImageView fotoPhoto;
 
         FotoViewHolder(View itemView) {
             super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.cardPhotoView);
-            fotoName = (TextView)itemView.findViewById(R.id.textPhotoView);
+
+
             fotoPhoto = (ImageView)itemView.findViewById(R.id.imagePhotoView);
         }
     }
