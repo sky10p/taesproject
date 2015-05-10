@@ -25,4 +25,13 @@
         android:src="@drawable/ic_launcher" >
     </ImageView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Sin Categoría"
+        android:id="@+id/printCategoria"
+        android:layout_above="@+id/button1"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
