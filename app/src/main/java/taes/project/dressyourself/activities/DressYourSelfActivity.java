@@ -3,6 +3,7 @@ package taes.project.dressyourself.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -42,15 +43,19 @@ public class DressYourSelfActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(onBackPressedListener == null){
-            if(!floatingButton.isExpanded()){
-                super.onBackPressed();
-            }else{
-                floatingButton.collapse();
-            }
-        }else{
-            onBackPressedListener.onBack();
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return;
         }
+        if(!floatingButton.isExpanded()){
+            super.onBackPressed();
+            return;
+        }else {
+            floatingButton.collapse();
+            return;
+        }
+
+
     }
 
     public void setFloatingButton(FloatingButtonCameraFragment fragment){
