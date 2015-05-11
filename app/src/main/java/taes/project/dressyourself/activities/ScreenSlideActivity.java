@@ -112,15 +112,15 @@ public class ScreenSlideActivity extends AppCompatActivity {
                     return new LoginFragment();
                 case 1:
                     bundle.putInt("imagen_id",R.drawable.organiza);
-                    bundle.putString("descripcion","Organiza tu ropa");
+                    bundle.putString("descripcion",getString(R.string.organiza));
                     break;
                 case 2:
                     bundle.putInt("imagen_id", R.drawable.aprovecha);
-                    bundle.putString("descripcion","Aprovecha tu ropa");
+                    bundle.putString("descripcion",getString(R.string.aprovecha));
                     break;
                 case 3:
                     bundle.putInt("imagen_id",R.drawable.comparte);
-                    bundle.putString("descripcion","Comparte tu ropa");
+                    bundle.putString("descripcion",getString(R.string.comparte));
                     break;
 
 
