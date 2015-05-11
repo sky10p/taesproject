@@ -41,6 +41,7 @@ public class AmigosFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        loadFriends();
         adapter.notifyDataSetChanged();
     }
 
@@ -74,17 +75,7 @@ public class AmigosFragment extends Fragment {
             }
         });
 
-        ParseUser user=ParseUser.getCurrentUser();
-
-        user.fetchInBackground(new GetCallback<ParseObject>() {
-            @Override
-            public void done(ParseObject parseObject, ParseException e) {
-                if(parseObject.has("amigos")){
-                    adapter.setAmigos((ArrayList<ParseUser>) parseObject.get("amigos"));
-                }
-
-            }
-        });
+        loadFriends();
 
         btnInsertarAmigo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +90,20 @@ public class AmigosFragment extends Fragment {
         return v;
 
 
+    }
+
+    private void loadFriends() {
+        ParseUser user=ParseUser.getCurrentUser();
+
+        user.fetchInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject parseObject, ParseException e) {
+                if(parseObject.has("amigos")){
+                    adapter.setAmigos((ArrayList<ParseUser>) parseObject.get("amigos"));
+                }
+
+            }
+        });
     }
 
     private void searchFriends() {
