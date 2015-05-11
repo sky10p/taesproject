@@ -1,9 +1,10 @@
-package taes.project.dressyourself.activities;
+package taes.project.dressyourself.fragments;
+
 
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import java.util.regex.Pattern;
 import taes.project.dressyourself.R;
 
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupFragment extends Fragment {
     private EditText usernameText;
     private EditText passwordText;
     private EditText emailText;
@@ -29,17 +30,16 @@ public class SignupActivity extends AppCompatActivity {
     private TextView error;
     private TextView success;
 
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-
-        usernameText = (EditText) findViewById(R.id.textUsername);
-        passwordText = (EditText) findViewById(R.id.textPassword);
-        emailText = (EditText) findViewById(R.id.textEmail);
-        signupBtn = (Button) findViewById(R.id.signupbtn);
-        error = (TextView) findViewById(R.id.textError);
-        success = (TextView) findViewById(R.id.textSignupSuccess);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v=inflater.inflate(R.layout.fragment_signup,container,false);
+        usernameText = (EditText) v.findViewById(R.id.textUsername);
+        passwordText = (EditText) v.findViewById(R.id.textPassword);
+        emailText = (EditText) v.findViewById(R.id.textEmail);
+        signupBtn = (Button) v.findViewById(R.id.signupbtn);
+        error = (TextView) v.findViewById(R.id.textError);
+        success = (TextView) v.findViewById(R.id.textSignupSuccess);
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +84,11 @@ public class SignupActivity extends AppCompatActivity {
                 signupBtn.setEnabled(true);
             }
         });
+
+        return v;
     }
+
+
 
 
 

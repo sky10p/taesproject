@@ -10,7 +10,6 @@ import android.widget.Button;
 
 import taes.project.dressyourself.R;
 import taes.project.dressyourself.activities.ScreenSlideActivity;
-import taes.project.dressyourself.activities.SignupActivity;
 
 /**
  * Created by isma on 2/04/15.
@@ -41,7 +40,8 @@ public class LoginSignupFragment extends Fragment {
         unirseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),SignupActivity.class));
+
+               getFragmentManager().beginTransaction().replace(R.id.slide_login_content,new SignupFragment()).addToBackStack(null).commit();
             }
         });
         return rootView;

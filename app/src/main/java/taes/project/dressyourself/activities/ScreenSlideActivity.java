@@ -1,6 +1,8 @@
 package taes.project.dressyourself.activities;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -39,6 +41,8 @@ public class ScreenSlideActivity extends AppCompatActivity {
      */
     private PagerAdapter mPagerAdapter;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +64,9 @@ public class ScreenSlideActivity extends AppCompatActivity {
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
-        mPager.setPageTransformer(true, new DepthPageTransformer());
+        //mPager.setPageTransformer(true, new DepthPageTransformer());
+
+
 
         LinePageIndicator indicator = (LinePageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
@@ -72,6 +78,8 @@ public class ScreenSlideActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
+
         if(mPager.getCurrentItem()==mPagerAdapter.getCount()-1){
             mPager.setCurrentItem(0,true);
             return;
@@ -81,14 +89,16 @@ public class ScreenSlideActivity extends AppCompatActivity {
             return;
         }
             // Otherwise, select the previous step.
-        mPager.setCurrentItem(mPager.getCurrentItem() - 1,true);
+        mPager.setCurrentItem(mPager.getCurrentItem() - 1, true);
 
     }
 
     public void cambiarPagina(int pagina){
-        mPager.setCurrentItem(pagina,true);
+        mPager.setCurrentItem(pagina, true);
+
 
     }
+
 
     /**
      * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in

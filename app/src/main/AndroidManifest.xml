@@ -56,9 +56,7 @@
             android:name=".activities.SearchAmigosActivity"
             android:label="@string/title_activity_search_amigos" >
         </activity>
-        <activity android:name=".activities.SignupActivity" android:label="@string/signupactivity">
 
-        </activity>
     </application>
 
 </manifest>
