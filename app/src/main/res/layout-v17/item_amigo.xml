@@ -12,9 +12,8 @@
     app:cardCornerRadius="4dp">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:padding="16dp">
         <ImageView
             android:layout_width="50dp"
@@ -30,7 +29,7 @@
             android:layout_marginRight="8dp" />
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/txtNameAmigo"
             android:text="cat"
             android:textColor="@color/black"
@@ -45,12 +44,12 @@
             android:layout_height="30dp"
             android:layout_alignParentTop="true"
             android:paddingLeft="8dp"
+            android:paddingStart="8dp"
             android:paddingRight="16dp"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:gravity="center"
             android:layout_alignParentRight="true"
             android:drawableLeft="@drawable/ic_action_ok"
-            android:drawableStart="@drawable/ic_action_ok"
             android:text="@string/siguiendo"
             android:background="@color/success_green"
             android:id="@+id/btnSeguir"

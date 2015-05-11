@@ -25,6 +25,7 @@ import taes.project.dressyourself.R;
 import taes.project.dressyourself.activities.DressYourSelfActivity;
 import taes.project.dressyourself.activities.SearchAmigosActivity;
 import taes.project.dressyourself.adapter.AmigosAdapter;
+import taes.project.dressyourself.listeners.RecyclerItemClickListener;
 
 /**
  * Created by pablo on 7/05/15.
@@ -35,12 +36,32 @@ public class AmigosFragment extends Fragment {
     private RecyclerView lstAmigos;
     private Button btnInsertarAmigo;
     private FloatingButtonAddFragment buttonAdd;
+    private AmigosAdapter adapter;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.list_amigos, container, false);
         lstAmigos = (RecyclerView) v.findViewById(R.id.lstAmigos);
         lstAmigos.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter = new AmigosAdapter(getActivity());
+        lstAmigos.setAdapter(adapter);
+        lstAmigos.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), lstAmigos, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        }));
         btnInsertarAmigo = (Button) v.findViewById(R.id.btnInsertarAmigo);
 
         buttonAdd=new FloatingButtonAddFragment();
@@ -59,7 +80,7 @@ public class AmigosFragment extends Fragment {
             @Override
             public void done(ParseObject parseObject, ParseException e) {
                 if(parseObject.has("amigos")){
-                    lstAmigos.setAdapter(new AmigosAdapter((ArrayList<ParseUser>) parseObject.get("amigos")));
+                    adapter.setAmigos((ArrayList<ParseUser>) parseObject.get("amigos"));
                 }
 
             }
