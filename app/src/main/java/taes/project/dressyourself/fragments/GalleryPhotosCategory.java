@@ -48,11 +48,7 @@ public class GalleryPhotosCategory extends  android.support.v4.app.Fragment {
     }
 
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ((DressYourSelfActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_activity_main);
-    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
