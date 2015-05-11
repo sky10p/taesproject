@@ -53,5 +53,6 @@
     <string name="siguiendo">Siguiendo</string>
     <string name="borrar_amigo">Borrar Amigo</string>
     <string name="sure_delete_friend">¿Estás seguro que quieres borrarlo?</string>
+    <string name="friends">Amigos</string>
 
 </resources>

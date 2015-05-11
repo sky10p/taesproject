@@ -34,7 +34,6 @@ public class AmigosFragment extends Fragment {
 
 
     private RecyclerView lstAmigos;
-    private Button btnInsertarAmigo;
     private FloatingButtonAddFragment buttonAdd;
     private AmigosAdapter adapter;
 
@@ -46,11 +45,18 @@ public class AmigosFragment extends Fragment {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ((DressYourSelfActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_activity_main);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.list_amigos, container, false);
         lstAmigos = (RecyclerView) v.findViewById(R.id.lstAmigos);
         lstAmigos.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new AmigosAdapter(getActivity());
+        ((DressYourSelfActivity)getActivity()).getSupportActionBar().setTitle(getActivity().getString(R.string.friends));
         lstAmigos.setAdapter(adapter);
         lstAmigos.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), lstAmigos, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -63,7 +69,7 @@ public class AmigosFragment extends Fragment {
 
             }
         }));
-        btnInsertarAmigo = (Button) v.findViewById(R.id.btnInsertarAmigo);
+
 
         buttonAdd=new FloatingButtonAddFragment();
         getFragmentManager().beginTransaction().replace(R.id.floatingButtonFragment,buttonAdd).commit();
@@ -77,12 +83,7 @@ public class AmigosFragment extends Fragment {
 
         loadFriends();
 
-        btnInsertarAmigo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchFriends();
-            }
-        });
+
 
 
 
@@ -98,7 +99,7 @@ public class AmigosFragment extends Fragment {
         user.fetchInBackground(new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject parseObject, ParseException e) {
-                if(parseObject.has("amigos")){
+                if (parseObject.has("amigos")) {
                     adapter.setAmigos((ArrayList<ParseUser>) parseObject.get("amigos"));
                 }
 
