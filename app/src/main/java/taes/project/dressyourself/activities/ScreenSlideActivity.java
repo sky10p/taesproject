@@ -64,6 +64,8 @@ public class ScreenSlideActivity extends AppCompatActivity {
 
         LinePageIndicator indicator = (LinePageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
+
+
     }
 
 
