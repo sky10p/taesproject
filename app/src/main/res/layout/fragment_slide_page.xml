@@ -17,6 +17,7 @@
         android:gravity="center"
         android:textSize="28dp"
         android:textColor="@color/accentDark"
+        android:id="@+id/txtSliceDescription"
         android:text="Descripcion" />
 
 </LinearLayout>

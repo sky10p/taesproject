@@ -46,5 +46,6 @@
     <string name="title_activity_camera_photo">CameraPhotoActivity</string>
     <string name="title_activity_camera">CameraActivity</string>
     <string name="title_activity_search_amigos">SearchAmigosActivity</string>
+    <string name="signupactivity">SignupActivity</string>
 
 </resources>

@@ -43,14 +43,7 @@
             android:name=".activities.PublicacionActivity"
             android:label="@string/title_activity_publicacion" >
         </activity>
-        <activity
-            android:name=".ArmarioActivity"
-            android:label="@string/title_activity_armario"
-            android:parentActivityName=".activities.DressYourSelfActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.DressYourSelfActivity" />
-        </activity>
+
         <activity
             android:name=".activities.CameraActivity"
             android:label="@string/title_activity_camera"
@@ -62,6 +55,9 @@
         <activity
             android:name=".activities.SearchAmigosActivity"
             android:label="@string/title_activity_search_amigos" >
+        </activity>
+        <activity android:name=".activities.SignupActivity" android:label="@string/signupactivity">
+
         </activity>
     </application>
 

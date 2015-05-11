@@ -1,9 +1,9 @@
-package taes.project.dressyourself.fragments;
+package taes.project.dressyourself.activities;
 
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,24 +21,25 @@ import java.util.regex.Pattern;
 import taes.project.dressyourself.R;
 
 
-public class SignupFragment extends Fragment {
+public class SignupActivity extends AppCompatActivity {
     private EditText usernameText;
     private EditText passwordText;
     private EditText emailText;
     private Button signupBtn;
     private TextView error;
     private TextView success;
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v;
-        v=inflater.inflate(R.layout.fragment_signup,container,false);
 
-        usernameText = (EditText) v.findViewById(R.id.textUsername);
-        passwordText = (EditText) v.findViewById(R.id.textPassword);
-        emailText = (EditText) v.findViewById(R.id.textEmail);
-        signupBtn = (Button) v.findViewById(R.id.signupbtn);
-        error = (TextView) v.findViewById(R.id.textError);
-        success = (TextView) v.findViewById(R.id.textSignupSuccess);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_signup);
+
+        usernameText = (EditText) findViewById(R.id.textUsername);
+        passwordText = (EditText) findViewById(R.id.textPassword);
+        emailText = (EditText) findViewById(R.id.textEmail);
+        signupBtn = (Button) findViewById(R.id.signupbtn);
+        error = (TextView) findViewById(R.id.textError);
+        success = (TextView) findViewById(R.id.textSignupSuccess);
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,10 +49,10 @@ public class SignupFragment extends Fragment {
                 String email = emailText.getText().toString();
                 error.setText("");
                 success.setVisibility(View.INVISIBLE);
-                if(username.equals("") || password.equals("") || email.equals("")){
+                if (username.equals("") || password.equals("") || email.equals("")) {
                     error.setText("Debe rellenar todos los campos");
-                }else{
-                    if(isEmailValid(email)){
+                } else {
+                    if (isEmailValid(email)) {
                         ParseUser user = new ParseUser();
                         user.setUsername(username);
                         user.setPassword(password);
@@ -59,10 +60,10 @@ public class SignupFragment extends Fragment {
                         user.signUpInBackground(new SignUpCallback() {
                             @Override
                             public void done(ParseException e) {
-                                if(e == null){
+                                if (e == null) {
                                     success.setVisibility(View.VISIBLE);
-                                }else{
-                                    switch(e.getCode()){
+                                } else {
+                                    switch (e.getCode()) {
                                         case ParseException.EMAIL_TAKEN:
                                             error.setText("El email introducido ya existe");
                                             break;
@@ -76,16 +77,16 @@ public class SignupFragment extends Fragment {
                                 }
                             }
                         });
-                    }else{
+                    } else {
                         error.setText("El email introducido no es válido");
                     }
                 }
                 signupBtn.setEnabled(true);
             }
         });
-
-        return v;
     }
+
+
 
     /**
      * method is used for checking valid email id format.
