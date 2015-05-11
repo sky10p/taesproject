@@ -10,10 +10,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseUser;
@@ -31,7 +33,7 @@ import taes.project.dressyourself.classes.Categoria;
 import taes.project.dressyourself.fragments.CategoryPhotoDialogFragment;
 
 
-public class CameraActivity extends ActionBarActivity implements CategoryPhotoDialogFragment.CategoriaDialogListener {
+public class CameraActivity extends AppCompatActivity implements CategoryPhotoDialogFragment.CategoriaDialogListener {
 
     //Entero que especifica la cantidad de fotos a tirar
     static final int REQUEST_IMAGE_CAPTURE = 0;
@@ -42,6 +44,8 @@ public class CameraActivity extends ActionBarActivity implements CategoryPhotoDi
 
     //Lista de categorias a mostrar
     List<Categoria> categorias = null;
+
+    private String categoria;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -104,11 +108,11 @@ public class CameraActivity extends ActionBarActivity implements CategoryPhotoDi
 
 
     //Crea una imagen unica en memoria destino  y la devuelve
-    private File createImageFile(String category) throws IOException {
+    private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES +"/"+ParseUser.getCurrentUser().getUsername()+"/"+category);
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES +"/"+ParseUser.getCurrentUser().getUsername()+"/"+categoria);
         if (!storageDir.exists()) {
             storageDir.mkdir();
         }
@@ -123,7 +127,7 @@ public class CameraActivity extends ActionBarActivity implements CategoryPhotoDi
         return image;
     }
     //invoca a la app camara y captura la imagen
-    public void dispatchTakePictureIntent(String category) {
+    public void dispatchTakePictureIntent() {
         //Si no existe algun softare para camara devuelve un mesnsaje denegando
         Context context = CameraActivity.this;
         PackageManager packageManager = context.getPackageManager();
@@ -138,7 +142,7 @@ public class CameraActivity extends ActionBarActivity implements CategoryPhotoDi
             // Create the File where the photo should go
             File photoFile = null;
             try {
-                photoFile = createImageFile(category);
+                photoFile = createImageFile();
             } catch (IOException ex) {
                 // Error occurred while creating the File
                 Log.e("dispatchTakePicture", "dispatchTakePictureIntent: Error creando imagen: " + ex.getMessage());
@@ -173,11 +177,13 @@ public class CameraActivity extends ActionBarActivity implements CategoryPhotoDi
 
     public void setPic() {
         //carga el layout correspondiente
-        setContentView(R.layout.camera_activity);
         checkFile();
-        ImageView imageView = (ImageView) findViewById(R.id.imageView1);        
+        setContentView(R.layout.camera_activity);
+        ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+        TextView categoria = (TextView) findViewById(R.id.printCategoria);
         Bitmap bMap = getBitmap();
         imageView.setImageBitmap(bMap);
+        categoria.setText(this.categoria);
     }
 
     public void checkFile(){
@@ -266,6 +272,7 @@ public class CameraActivity extends ActionBarActivity implements CategoryPhotoDi
 
     @Override
     public void onDialogAccept(String categoria) {
-        dispatchTakePictureIntent(categoria);
+        this.categoria = categoria;
+        dispatchTakePictureIntent();
     }
 }

@@ -1,6 +1,7 @@
 package taes.project.dressyourself.fragments;
 
 
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -28,11 +29,11 @@ public class SignupFragment extends Fragment {
     private Button signupBtn;
     private TextView error;
     private TextView success;
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v;
-        v=inflater.inflate(R.layout.fragment_signup,container,false);
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v=inflater.inflate(R.layout.fragment_signup,container,false);
         usernameText = (EditText) v.findViewById(R.id.textUsername);
         passwordText = (EditText) v.findViewById(R.id.textPassword);
         emailText = (EditText) v.findViewById(R.id.textEmail);
@@ -48,10 +49,10 @@ public class SignupFragment extends Fragment {
                 String email = emailText.getText().toString();
                 error.setText("");
                 success.setVisibility(View.INVISIBLE);
-                if(username.equals("") || password.equals("") || email.equals("")){
+                if (username.equals("") || password.equals("") || email.equals("")) {
                     error.setText("Debe rellenar todos los campos");
-                }else{
-                    if(isEmailValid(email)){
+                } else {
+                    if (isEmailValid(email)) {
                         ParseUser user = new ParseUser();
                         user.setUsername(username);
                         user.setPassword(password);
@@ -59,10 +60,10 @@ public class SignupFragment extends Fragment {
                         user.signUpInBackground(new SignUpCallback() {
                             @Override
                             public void done(ParseException e) {
-                                if(e == null){
+                                if (e == null) {
                                     success.setVisibility(View.VISIBLE);
-                                }else{
-                                    switch(e.getCode()){
+                                } else {
+                                    switch (e.getCode()) {
                                         case ParseException.EMAIL_TAKEN:
                                             error.setText("El email introducido ya existe");
                                             break;
@@ -76,7 +77,7 @@ public class SignupFragment extends Fragment {
                                 }
                             }
                         });
-                    }else{
+                    } else {
                         error.setText("El email introducido no es válido");
                     }
                 }
@@ -86,6 +87,10 @@ public class SignupFragment extends Fragment {
 
         return v;
     }
+
+
+
+
 
     /**
      * method is used for checking valid email id format.

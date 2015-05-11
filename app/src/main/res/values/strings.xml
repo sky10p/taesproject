@@ -45,5 +45,10 @@
     <string name="title_activity_armario">ArmarioActivity</string>
     <string name="title_activity_camera_photo">CameraPhotoActivity</string>
     <string name="title_activity_camera">CameraActivity</string>
+    <string name="title_activity_search_amigos">SearchAmigosActivity</string>
+    <string name="signupactivity">SignupActivity</string>
+    <string name="organiza">Organiza tu ropa</string>
+    <string name="aprovecha">Aprovecha tu ropa</string>
+    <string name="comparte">Comparte tu ropa</string>
 
 </resources>
