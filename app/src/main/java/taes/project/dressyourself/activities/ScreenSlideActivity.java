@@ -1,8 +1,6 @@
 package taes.project.dressyourself.activities;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -10,14 +8,12 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-
 import com.viewpagerindicator.LinePageIndicator;
 
 import taes.project.dressyourself.R;
 import taes.project.dressyourself.fragments.LoginFragment;
 import taes.project.dressyourself.fragments.LoginSignupFragment;
 import taes.project.dressyourself.fragments.SlidePageFragment;
-import taes.project.dressyourself.transformers.DepthPageTransformer;
 
 /**
  * Created by isma on 1/04/15.
@@ -64,7 +60,8 @@ public class ScreenSlideActivity extends AppCompatActivity {
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
-        //mPager.setPageTransformer(true, new DepthPageTransformer());
+
+        //mPager.setPageTransformer(true, new RotateUpTransformer());
 
 
 

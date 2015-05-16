@@ -50,5 +50,9 @@
     <string name="organiza">Organiza tu ropa</string>
     <string name="aprovecha">Aprovecha tu ropa</string>
     <string name="comparte">Comparte tu ropa</string>
+    <string name="siguiendo">Siguiendo</string>
+    <string name="borrar_amigo">Borrar Amigo</string>
+    <string name="sure_delete_friend">¿Estás seguro que quieres borrarlo?</string>
+    <string name="friends">Amigos</string>
 
 </resources>
