@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +25,7 @@ import taes.project.dressyourself.R;
 import taes.project.dressyourself.activities.DressYourSelfActivity;
 import taes.project.dressyourself.adapter.AdapterGaleria;
 import taes.project.dressyourself.classes.Foto;
+import taes.project.dressyourself.listeners.RecyclerItemClickListener;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
@@ -34,19 +36,25 @@ public class GalleryPhotosCategory extends  android.support.v4.app.Fragment {
 
 
     private static String TAG = "galleryPhotosCategory";
-    private String mCurrentCategoryPath;
+    public String mCurrentCategoryPath;
     AsyncTaskLoadFiles myAsyncTaskLoadFiles;
 
-    private RecyclerView listarFotoPorCategoria;
+    public RecyclerView listarFotoPorCategoria;
     private RecyclerView.LayoutManager mLayoutManagerFotoCPorCategoria;
     AdapterGaleria mAdapter;
     ArrayList<Foto> mPhotoAlbum;
     private FloatingButtonCameraFragment fragmentCamera;
 
+    public static RecyclerItemClickListener.OnItemClickListener clickListener;
+
+    public static void setItemClickListener(RecyclerItemClickListener.OnItemClickListener listener)
+    {
+        clickListener = listener;
+    }
+
     public GalleryPhotosCategory() {
         // Required empty public constructor
     }
-
 
 
 
@@ -76,7 +84,10 @@ public class GalleryPhotosCategory extends  android.support.v4.app.Fragment {
         listarFotoPorCategoria.setAdapter(mAdapter);
         mLayoutManagerFotoCPorCategoria = new GridLayoutManager(getActivity(),3);
         listarFotoPorCategoria.setLayoutManager(mLayoutManagerFotoCPorCategoria);
-
+        if(clickListener != null)
+        {
+            listarFotoPorCategoria.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), listarFotoPorCategoria, clickListener));
+        }
         return v;
     }
 

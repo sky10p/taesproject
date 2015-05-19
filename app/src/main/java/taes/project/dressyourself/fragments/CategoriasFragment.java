@@ -39,23 +39,27 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
     private AdapterCategoria adapter;
     private RecyclerView.LayoutManager manager;
     private FragmentActivity context;
-    private Button insertarBtn;
     private ActionMode actionMode;
     FloatingButtonAddFragment buttonAdd;
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ((DressYourSelfActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_activity_main);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.list_categorias,container,false);
         context = getActivity();
+        ((DressYourSelfActivity)context).getSupportActionBar().setTitle(context.getString(R.string.categorias));
         ((DressYourSelfActivity) context).setOnBackPressedListener(new OnBackPressedListener() {
             @Override
             public void onBack() {
-                if(actionMode==null){
+                if (actionMode == null) {
                     ((DressYourSelfActivity) context).setOnBackPressedListener(null);
                     context.onBackPressed();
-                }else{
+                } else {
                     actionMode.finish();
                 }
             }
@@ -77,13 +81,6 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
         adapter=new AdapterCategoria();
         listaCategorias.setAdapter(adapter);
         listaCategorias.setItemAnimator(new DefaultItemAnimator());
-        insertarBtn = (Button) v.findViewById(R.id.insertarCategoriaBtn);
-        insertarBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                insertarCategoriaDialog();
-            }
-        });
         listaCategorias.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), listaCategorias, new RecyclerItemClickListener.OnItemClickListener(){
             @Override
             public void onItemClick(View view, int position)
@@ -97,6 +94,7 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
                    bundle.putString("categoria", nombre);
                    gallery.setArguments(bundle);
                    context.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, gallery).addToBackStack(null).commit();
+                    GalleryPhotosCategory.setItemClickListener(null);
                    Log.v("onClick", "Pos: " + position + " nombre: " + nombre);
                 }
 

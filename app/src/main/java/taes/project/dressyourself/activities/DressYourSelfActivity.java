@@ -20,8 +20,8 @@ import taes.project.dressyourself.R;
 import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
 import taes.project.dressyourself.fragments.AmigosFragment;
 import taes.project.dressyourself.fragments.CategoriasFragment;
-import taes.project.dressyourself.fragments.ConjuntosFragment;
 import taes.project.dressyourself.fragments.FloatingButtonCameraFragment;
+import taes.project.dressyourself.fragments.PublicacionesFragment;
 import taes.project.dressyourself.interfaces.OnBackPressedListener;
 import taes.project.dressyourself.interfaces.OnDrawerLayoutMenuListener;
 
@@ -29,9 +29,9 @@ import taes.project.dressyourself.interfaces.OnDrawerLayoutMenuListener;
 public class DressYourSelfActivity extends AppCompatActivity {
 
     public Toolbar toolbar;
-    private DrawerLayout drawerLayout;
+    public DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawer;
-    private ConjuntosFragment conjuntosFragment;
+    private PublicacionesFragment publicacionesFragment;
     private RecyclerView listaDrawer;
     public FloatingButtonCameraFragment floatingButton;
 
@@ -47,15 +47,13 @@ public class DressYourSelfActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(GravityCompat.START);
             return;
         }
-        if(!floatingButton.isExpanded()){
+       if(!floatingButton.isExpanded()){
             super.onBackPressed();
             return;
         }else {
             floatingButton.collapse();
             return;
         }
-
-
     }
 
     public void setFloatingButton(FloatingButtonCameraFragment fragment){
@@ -108,7 +106,7 @@ public class DressYourSelfActivity extends AppCompatActivity {
         });
 
         listaDrawer.setAdapter(adapter);
-        conjuntosFragment=new ConjuntosFragment();
+        publicacionesFragment =new PublicacionesFragment();
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -125,7 +123,7 @@ public class DressYourSelfActivity extends AppCompatActivity {
             }
         });
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().add(R.id.content_frame,conjuntosFragment).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.content_frame, publicacionesFragment).commit();
         }
 
     }
