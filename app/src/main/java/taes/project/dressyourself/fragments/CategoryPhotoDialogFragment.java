@@ -117,7 +117,7 @@ public class CategoryPhotoDialogFragment extends DialogFragment {
         this.categorias = categorias;
     }
 
-    public void setDialogListener(CameraActivity l)
+    public void setDialogListener(CategoriaDialogListener l)
     {
         dialogListener = l;
     }

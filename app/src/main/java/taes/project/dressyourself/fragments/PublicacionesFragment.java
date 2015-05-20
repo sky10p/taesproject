@@ -16,25 +16,33 @@ import taes.project.dressyourself.adapter.AdapterConjunto;
 /**
  * Created by pablo on 24/02/15.
  */
-public class ConjuntosFragment extends Fragment {
+public class PublicacionesFragment extends Fragment {
 
     private RecyclerView lstConjuntos;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
     private Context contexto;
-    FloatingButtonCameraFragment fragmentCamera;
-
+    //FloatingButtonCameraFragment fragmentCamera;
+    FloatingButtonAddFragment floatingBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.list_conjuntos,container,false);
-        fragmentCamera=new FloatingButtonCameraFragment();
-        getFragmentManager().beginTransaction().replace(R.id.floatingButtonFragment,fragmentCamera).commit();
-        ((DressYourSelfActivity)getActivity()).setFloatingButton(fragmentCamera);
+        View v=inflater.inflate(R.layout.list_publicaciones,container,false);
+        floatingBtn = new FloatingButtonAddFragment();
+        //fragmentCamera=new FloatingButtonCameraFragment();
+        getFragmentManager().beginTransaction().replace(R.id.floatingButtonFragment,floatingBtn).commit();
+        ((DressYourSelfActivity)getActivity()).setFloatingButton(floatingBtn);
         lstConjuntos= (RecyclerView) v.findViewById(R.id.lstConjuntos);
         manager=new LinearLayoutManager(getActivity());
         lstConjuntos.setLayoutManager(manager);
         adapter=new AdapterConjunto();
         lstConjuntos.setAdapter(adapter);
+        floatingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new NuevaPublicacionFragment()).addToBackStack(null).commit();
+                ((DressYourSelfActivity) getActivity()).drawerLayout.closeDrawers();
+            }
+        });
         return v;
     }
 
