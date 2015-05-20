@@ -12,7 +12,7 @@ import taes.project.dressyourself.R;
 /**
  * Created by pablo on 10/05/15.
  */
-public class FloatingButtonAddFragment extends FloatingButtonCameraFragment{
+public class FloatingButtonAddFragment extends FloatingButtonFragment {
 
 
 

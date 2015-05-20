@@ -57,6 +57,11 @@ public class AdapterGaleria extends RecyclerView.Adapter<AdapterGaleria.FotoView
         fotos.add(foto);
     }
 
+    public void setAlbum(ArrayList<Foto> album) {
+        this.fotos = album;
+        notifyDataSetChanged();
+    }
+
     public static class FotoViewHolder extends RecyclerView.ViewHolder {
 
 

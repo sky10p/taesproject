@@ -1,109 +1,57 @@
 package taes.project.dressyourself.fragments;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import taes.project.dressyourself.R;
 import taes.project.dressyourself.activities.CameraActivity;
+import taes.project.dressyourself.activities.DressYourSelfActivity;
 
 /**
- * Created by pablo on 27/03/15.
+ * Created by Pablo on 20/05/2015.
  */
-public class FloatingButtonCameraFragment extends Fragment {
+public class FloatingButtonCameraFragment extends  FloatingButtonFragment {
 
-    private FloatingActionsMenu btnFloatingMain;
-    private RelativeLayout relativeLayout;
+    FloatingActionButton button;
+    private View.OnClickListener listener;
 
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener=listener;
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_floating_button_camera,container,false);
-
-        btnFloatingMain= (FloatingActionsMenu) v.findViewById(R.id.multiple_actions);
-        relativeLayout= (RelativeLayout) v.findViewById(R.id.fondoFloatingButton);
-
-        onClickPhotoAndVoteButton(v);
-
-        btnFloatingMain.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
-            @Override
-            public void onMenuExpanded() {
-                relativeLayout.setBackgroundResource(R.color.black_semi_transparent);
-                relativeLayout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        btnFloatingMain.collapse();
-                    }
-                });
-                relativeLayout.setClickable(true);
-            }
-
-            @Override
-            public void onMenuCollapsed() {
-                relativeLayout.setBackgroundColor(Color.TRANSPARENT);
-                relativeLayout.setClickable(false);
-            }
-        });
-
-
-
-
-
-
-        return v;
-    }
-
-    public void onClickPhotoAndVoteButton(View v) {
-        onClickPhotoButton(v);
-        onClickVoteButton(v);
-    }
-
-
-    // Al hacer click en icono de foto
-    public void onClickPhotoButton(View v) {
-
-        v.findViewById(R.id.action_photo).setOnClickListener(new View.OnClickListener() {
+        View v=inflater.inflate(R.layout.fragment_floating_camera_button,container,false);
+        button= (FloatingActionButton) v.findViewById(R.id.btnAdd);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(getActivity(), CameraActivity.class);
+                Bundle bundle=new Bundle();
+                String categoria= ((DressYourSelfActivity)getActivity()).getSupportActionBar().getTitle().toString();
+                bundle.putString("categoria",categoria);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
 
+        return v;
     }
 
-    // Al hacer click en icono de voto
-    public void onClickVoteButton(View v) {
-
-        v.findViewById(R.id.action_vote).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Clicked Vote Button", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+    @Override
+    public boolean isExpanded() {
+        return false;
     }
 
-    public boolean isExpanded(){
-        return btnFloatingMain.isExpanded();
-    }
+    @Override
+    public void collapse() {
 
-    public void collapse(){
-        btnFloatingMain.collapse();
     }
 }

@@ -35,7 +35,7 @@ public class PublicacionesFragment extends Fragment {
     private AdapterConjunto adapter;
     private RecyclerView.LayoutManager manager;
     private Context contexto;
-    //FloatingButtonCameraFragment fragmentCamera;
+    //FloatingButtonFragment fragmentCamera;
     FloatingButtonAddFragment floatingBtn;
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -44,7 +44,7 @@ public class PublicacionesFragment extends Fragment {
         View v=inflater.inflate(R.layout.list_publicaciones,container,false);
         floatingBtn = new FloatingButtonAddFragment();
         swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
-        //fragmentCamera=new FloatingButtonCameraFragment();
+        //fragmentCamera=new FloatingButtonFragment();
         getFragmentManager().beginTransaction().replace(R.id.floatingButtonFragment,floatingBtn).commit();
         ((DressYourSelfActivity)getActivity()).setFloatingButton(floatingBtn);
         lstConjuntos= (RecyclerView) v.findViewById(R.id.lstConjuntos);

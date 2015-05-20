@@ -91,6 +91,13 @@ public class CameraActivity extends AppCompatActivity implements CategoryPhotoDi
 
     public void addPhoto() {
 
+        Bundle bundle=getIntent().getExtras();
+        String categoria=bundle.getString("categoria");
+        if(categoria!=null){
+            this.categoria = categoria;
+            dispatchTakePictureIntent();
+            return;
+        }
         categorias = Categoria.getAllByUser(ParseUser.getCurrentUser(), new AdapterCategoria.AdapterCategoriaCallback() {
             @Override
             public void onDataLoaded() {

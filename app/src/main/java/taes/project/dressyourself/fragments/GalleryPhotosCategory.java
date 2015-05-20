@@ -6,15 +6,13 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.parse.ParseUser;
 
@@ -43,9 +41,10 @@ public class GalleryPhotosCategory extends  android.support.v4.app.Fragment {
     private RecyclerView.LayoutManager mLayoutManagerFotoCPorCategoria;
     AdapterGaleria mAdapter;
     ArrayList<Foto> mPhotoAlbum;
-    private FloatingButtonCameraFragment fragmentCamera;
+    private FloatingButtonFragment fragmentCamera;
 
     public static RecyclerItemClickListener.OnItemClickListener clickListener;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public static void setItemClickListener(RecyclerItemClickListener.OnItemClickListener listener)
     {
@@ -88,6 +87,15 @@ public class GalleryPhotosCategory extends  android.support.v4.app.Fragment {
         {
             listarFotoPorCategoria.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), listarFotoPorCategoria, clickListener));
         }
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPhotoAlbum=listaFotosPorCategoria();
+                swipeRefreshLayout.setRefreshing(false);
+                mAdapter.setAlbum(mPhotoAlbum);
+            }
+        });
         return v;
     }
 

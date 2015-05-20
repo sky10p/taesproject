@@ -20,7 +20,7 @@ import taes.project.dressyourself.R;
 import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
 import taes.project.dressyourself.fragments.AmigosFragment;
 import taes.project.dressyourself.fragments.CategoriasFragment;
-import taes.project.dressyourself.fragments.FloatingButtonCameraFragment;
+import taes.project.dressyourself.fragments.FloatingButtonFragment;
 import taes.project.dressyourself.fragments.PublicacionesFragment;
 import taes.project.dressyourself.interfaces.OnBackPressedListener;
 import taes.project.dressyourself.interfaces.OnDrawerLayoutMenuListener;
@@ -33,7 +33,7 @@ public class DressYourSelfActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawer;
     private PublicacionesFragment publicacionesFragment;
     private RecyclerView listaDrawer;
-    public FloatingButtonCameraFragment floatingButton;
+    public FloatingButtonFragment floatingButton;
 
     private OnBackPressedListener onBackPressedListener;
 
@@ -56,7 +56,7 @@ public class DressYourSelfActivity extends AppCompatActivity {
         }
     }
 
-    public void setFloatingButton(FloatingButtonCameraFragment fragment){
+    public void setFloatingButton(FloatingButtonFragment fragment){
         this.floatingButton=fragment;
     }
 

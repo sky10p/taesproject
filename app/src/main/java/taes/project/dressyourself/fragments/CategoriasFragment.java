@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
@@ -42,6 +43,7 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
     private ActionMode actionMode;
     FloatingButtonAddFragment buttonAdd;
 
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -64,6 +66,8 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
                 }
             }
         });
+
+
         buttonAdd=new FloatingButtonAddFragment();
         getFragmentManager().beginTransaction().replace(R.id.floatingButtonFragment,buttonAdd).commit();
         ((DressYourSelfActivity)getActivity()).setFloatingButton(buttonAdd);
@@ -81,35 +85,35 @@ public class CategoriasFragment extends Fragment implements InsertarCategoriaDia
         adapter=new AdapterCategoria();
         listaCategorias.setAdapter(adapter);
         listaCategorias.setItemAnimator(new DefaultItemAnimator());
-        listaCategorias.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), listaCategorias, new RecyclerItemClickListener.OnItemClickListener(){
+        listaCategorias.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), listaCategorias, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position)
-            {
+            public void onItemClick(View view, int position) {
                 String nombre = null;
 
-                if(actionMode==null){
-                   nombre = adapter.categorias.get(position).getNombre();
-                   GalleryPhotosCategory gallery = new GalleryPhotosCategory();
-                   Bundle bundle = new Bundle();
-                   bundle.putString("categoria", nombre);
-                   gallery.setArguments(bundle);
-                   context.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, gallery).addToBackStack(null).commit();
+                if (actionMode == null) {
+                    nombre = adapter.categorias.get(position).getNombre();
+                    GalleryPhotosCategory gallery = new GalleryPhotosCategory();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("categoria", nombre);
+                    gallery.setArguments(bundle);
+                    context.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, gallery).addToBackStack(null).commit();
                     GalleryPhotosCategory.setItemClickListener(null);
-                   Log.v("onClick", "Pos: " + position + " nombre: " + nombre);
+                    Log.v("onClick", "Pos: " + position + " nombre: " + nombre);
                 }
 
             }
+
             @Override
-            public void onItemLongClick(View view, final int position)
-            {
+            public void onItemLongClick(View view, final int position) {
                 adapter.selected(position);
-                if(actionMode==null)
-                {
+                if (actionMode == null) {
                     AppCompatActivity activity = (AppCompatActivity) getActivity();
                     actionMode = activity.startSupportActionMode(mActionModeCallback);
                 }
             }
         }));
+
+
         return v;
     }
     @Override
