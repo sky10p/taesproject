@@ -42,7 +42,7 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_conjunto_ropa,parent,false);
+        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_publicaciones_ropa,parent,false);
 
         ViewHolder vh=new ViewHolder(v);
         return vh;

@@ -26,7 +26,7 @@ public class PublicacionesFragment extends Fragment {
     FloatingButtonAddFragment floatingBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.list_conjuntos,container,false);
+        View v=inflater.inflate(R.layout.list_publicaciones,container,false);
         floatingBtn = new FloatingButtonAddFragment();
         //fragmentCamera=new FloatingButtonCameraFragment();
         getFragmentManager().beginTransaction().replace(R.id.floatingButtonFragment,floatingBtn).commit();
