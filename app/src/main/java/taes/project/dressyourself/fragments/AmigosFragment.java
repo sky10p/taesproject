@@ -8,23 +8,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import com.parse.FindCallback;
 import com.parse.GetCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import taes.project.dressyourself.R;
 import taes.project.dressyourself.activities.DressYourSelfActivity;
 import taes.project.dressyourself.activities.SearchAmigosActivity;
 import taes.project.dressyourself.adapter.AmigosAdapter;
+import taes.project.dressyourself.interfaces.OnLoadedFriends;
 import taes.project.dressyourself.listeners.RecyclerItemClickListener;
 
 /**
@@ -40,7 +36,12 @@ public class AmigosFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        loadFriends();
+        loadFriends(new OnLoadedFriends() {
+            @Override
+            public void loaded(ArrayList<ParseUser> amigos) {
+                adapter.setAmigos(amigos);
+            }
+        });
         adapter.notifyDataSetChanged();
     }
 
@@ -81,7 +82,12 @@ public class AmigosFragment extends Fragment {
             }
         });
 
-        loadFriends();
+        loadFriends(new OnLoadedFriends() {
+            @Override
+            public void loaded(ArrayList<ParseUser> amigos) {
+                adapter.setAmigos(amigos);
+            }
+        });
 
 
 
@@ -93,14 +99,15 @@ public class AmigosFragment extends Fragment {
 
     }
 
-    private void loadFriends() {
+    public static void loadFriends(final OnLoadedFriends onLoadedFriends) {
         ParseUser user=ParseUser.getCurrentUser();
 
         user.fetchInBackground(new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject parseObject, ParseException e) {
                 if (parseObject.has("amigos")) {
-                    adapter.setAmigos((ArrayList<ParseUser>) parseObject.get("amigos"));
+                    onLoadedFriends.loaded((ArrayList<ParseUser>) parseObject.get("amigos"));
+
                 }
 
             }
