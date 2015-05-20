@@ -1,7 +1,9 @@
 package taes.project.dressyourself.adapter;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
@@ -11,9 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import taes.project.dressyourself.R;
+import taes.project.dressyourself.listeners.onDrawableLoaded;
+import taes.project.dressyourself.utils.DrawableUtils;
 
 /**
  * Created by pablo on 24/02/15.
@@ -22,22 +27,36 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
 
 
     private ArrayList<ConjuntoRopa> conjunto;
-    private class ConjuntoRopa{
-        public String titulo;
-        public int imagen;
+    private Context context;
 
-
-        public ConjuntoRopa(String titulo, int imagen){
-            this.titulo=titulo;
-            this.imagen=imagen;
-        }
+    public void setConjuntos(ArrayList<ConjuntoRopa> conjuntos) {
+        this.conjunto = conjuntos;
+        notifyDataSetChanged();
     }
 
-    public AdapterConjunto(){
+    public static class ConjuntoRopa{
+        public String titulo;
+        public String descripcion;
+        public String url;
+
+
+        public ConjuntoRopa(String titulo, String descripcion, String url){
+            this.titulo=titulo;
+            this.descripcion=descripcion;
+            this.url=url;
+        }
+
+
+    }
+
+    public AdapterConjunto(Context c){
         conjunto = new ArrayList<>();
-        conjunto.add(new ConjuntoRopa("conjunto1", R.drawable.conjunto1));
-        conjunto.add(new ConjuntoRopa("conjunto2",R.drawable.conjunto2));
-        conjunto.add(new ConjuntoRopa("conjunto3",R.drawable.conjunto3));
+        context=c;
+
+        /*String descripcion="Esto es una prueba de descripción";
+        conjunto.add(new ConjuntoRopa("conjunto1",descripcion, context.getResources().getDrawable(R.drawable.conjunto1)));
+        conjunto.add(new ConjuntoRopa("conjunto2",descripcion,context.getResources().getDrawable(R.drawable.conjunto2)));
+        conjunto.add(new ConjuntoRopa("conjunto3", descripcion,context.getResources().getDrawable(R.drawable.conjunto3)));*/
     }
 
     @Override
@@ -51,20 +70,35 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
-        BitmapDrawable drawableBitMap= (BitmapDrawable) holder.imagen.getResources().getDrawable(conjunto.get(position).imagen);
-        holder.imagen.setImageDrawable(drawableBitMap);
-        holder.titulo.setText(conjunto.get(position).titulo);
-
-        AsyncTask<Bitmap, Void, Palette> palette=Palette.generateAsync(drawableBitMap.getBitmap(), new Palette.PaletteAsyncListener() {
+        DrawableUtils.getDrawableFromUrl(conjunto.get(position).url, new onDrawableLoaded() {
             @Override
-            public void onGenerated(Palette palette) {
-                Palette.Swatch swatch=palette.getVibrantSwatch();
-                if(swatch!=null){
-                    holder.titulo.setBackgroundColor(swatch.getRgb());
-                    holder.titulo.setTextColor(swatch.getTitleTextColor());
-                }
+            public void someError(IOException e) {
+
+            }
+
+            @Override
+            public void done(Drawable drawable) {
+                holder.imagen.setImageDrawable(drawable);
+                BitmapDrawable bitMapDrawable= (BitmapDrawable) drawable;
+                Palette.from(bitMapDrawable.getBitmap()).generate(new Palette.PaletteAsyncListener() {
+                    @Override
+                    public void onGenerated(Palette palette) {
+                        Palette.Swatch swatch = palette.getVibrantSwatch();
+                        if (swatch != null) {
+                            holder.titulo.setBackgroundColor(swatch.getRgb());
+                            holder.titulo.setTextColor(swatch.getTitleTextColor());
+                        }
+                    }
+                });
             }
         });
+
+        holder.titulo.setText(conjunto.get(position).titulo);
+        holder.descripcion.setText(conjunto.get(position).descripcion);
+
+
+
+
 
     }
 
@@ -77,11 +111,13 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
 
         public ImageView imagen;
         public TextView titulo;
+        public TextView descripcion;
         public ViewHolder(View itemView) {
             super(itemView);
 
             imagen= (ImageView) itemView.findViewById(R.id.imgConjunto);
             titulo= (TextView) itemView.findViewById(R.id.txtTituloConjunto);
+            descripcion= (TextView) itemView.findViewById(R.id.txtDescripcion);
         }
     }
 }
