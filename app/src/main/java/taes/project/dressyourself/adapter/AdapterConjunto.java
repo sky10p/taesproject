@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -70,16 +73,11 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
-        DrawableUtils.getDrawableFromUrl(conjunto.get(position).url, new onDrawableLoaded() {
-            @Override
-            public void someError(IOException e) {
 
-            }
-
+        Picasso.with(context).load(conjunto.get(position).url).into(holder.imagen, new Callback() {
             @Override
-            public void done(Drawable drawable) {
-                holder.imagen.setImageDrawable(drawable);
-                BitmapDrawable bitMapDrawable= (BitmapDrawable) drawable;
+            public void onSuccess() {
+                BitmapDrawable bitMapDrawable= (BitmapDrawable) holder.imagen.getDrawable();
                 Palette.from(bitMapDrawable.getBitmap()).generate(new Palette.PaletteAsyncListener() {
                     @Override
                     public void onGenerated(Palette palette) {
@@ -91,7 +89,15 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
                     }
                 });
             }
+
+            @Override
+            public void onError() {
+
+            }
         });
+
+
+
 
         holder.titulo.setText(conjunto.get(position).titulo);
         holder.descripcion.setText(conjunto.get(position).descripcion);
