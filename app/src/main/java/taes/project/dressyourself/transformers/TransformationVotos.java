@@ -64,6 +64,6 @@ public class TransformationVotos implements Transformation {
 
     @Override
     public String key() {
-        return "transformacionvotos";
+        return "transformacionvotos"+gText;
     }
 }

@@ -94,7 +94,7 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
 
         Picasso.with(context).load(conjunto.get(position).url).into(holder.imagen, new Callback() {
@@ -122,8 +122,22 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
         //Picasso.with(context).load(R.drawable.me_gusta).transform(new TransformationVotos(context,"1")).into(holder.btnMeGusta);
 
 
+
         Picasso.with(context).load(R.drawable.me_gusta).resize(300, 300).transform(new TransformationVotos(context, conjunto.get(position).getVotos())).into(holder.btnMeGusta);
 
+        holder.btnMeGusta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!holder.votado){
+                    conjunto.get(position).votos++;
+                    holder.votado=true;
+                    Picasso.with(context).load(R.drawable.me_gusta).resize(300, 300).transform(new TransformationVotos(context, conjunto.get(position).getVotos())).into(holder.btnMeGusta);
+
+                }else {
+                    Toast.makeText(context,"Ya ha votado",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         holder.titulo.setText(conjunto.get(position).titulo);
         holder.descripcion.setText(conjunto.get(position).descripcion);
@@ -146,6 +160,8 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
         public TextView descripcion;
         public ImageButton btnMeGusta;
 
+        public Boolean votado;
+
 
 
         public ViewHolder(View itemView) {
@@ -156,7 +172,7 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
             descripcion= (TextView) itemView.findViewById(R.id.txtDescripcion);
             btnMeGusta= (ImageButton) itemView.findViewById(R.id.imgMeGusta);
 
-
+            votado=false;
 
         }
 
