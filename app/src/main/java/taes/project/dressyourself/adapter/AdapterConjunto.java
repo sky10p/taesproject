@@ -10,17 +10,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import taes.project.dressyourself.R;
 import taes.project.dressyourself.listeners.onDrawableLoaded;
+import taes.project.dressyourself.transformers.TransformationVotos;
 import taes.project.dressyourself.utils.DrawableUtils;
 
 /**
@@ -32,6 +36,7 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
     private ArrayList<ConjuntoRopa> conjunto;
     private Context context;
 
+
     public void setConjuntos(ArrayList<ConjuntoRopa> conjuntos) {
         this.conjunto = conjuntos;
         notifyDataSetChanged();
@@ -41,12 +46,26 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
         public String titulo;
         public String descripcion;
         public String url;
+        public int votos;
+
 
 
         public ConjuntoRopa(String titulo, String descripcion, String url){
             this.titulo=titulo;
             this.descripcion=descripcion;
             this.url=url;
+            this.votos=0;
+        }
+
+        public ConjuntoRopa(String titulo, String descripcion, String url, int votos){
+            this.titulo=titulo;
+            this.descripcion=descripcion;
+            this.url=url;
+            this.votos=votos;
+        }
+
+        public String getVotos(){
+            return String.valueOf(votos);
         }
 
 
@@ -55,6 +74,7 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
     public AdapterConjunto(Context c){
         conjunto = new ArrayList<>();
         context=c;
+
 
         /*String descripcion="Esto es una prueba de descripción";
         conjunto.add(new ConjuntoRopa("conjunto1",descripcion, context.getResources().getDrawable(R.drawable.conjunto1)));
@@ -66,12 +86,15 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_publicaciones_ropa,parent,false);
 
+
+
         ViewHolder vh=new ViewHolder(v);
+
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
 
         Picasso.with(context).load(conjunto.get(position).url).into(holder.imagen, new Callback() {
@@ -96,8 +119,25 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
             }
         });
 
+        //Picasso.with(context).load(R.drawable.me_gusta).transform(new TransformationVotos(context,"1")).into(holder.btnMeGusta);
 
 
+
+        Picasso.with(context).load(R.drawable.me_gusta).resize(300, 300).transform(new TransformationVotos(context, conjunto.get(position).getVotos())).into(holder.btnMeGusta);
+
+        holder.btnMeGusta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!holder.votado){
+                    conjunto.get(position).votos++;
+                    holder.votado=true;
+                    Picasso.with(context).load(R.drawable.me_gusta).resize(300, 300).transform(new TransformationVotos(context, conjunto.get(position).getVotos())).into(holder.btnMeGusta);
+
+                }else {
+                    Toast.makeText(context,"Ya ha votado",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         holder.titulo.setText(conjunto.get(position).titulo);
         holder.descripcion.setText(conjunto.get(position).descripcion);
@@ -118,12 +158,24 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
         public ImageView imagen;
         public TextView titulo;
         public TextView descripcion;
+        public ImageButton btnMeGusta;
+
+        public Boolean votado;
+
+
+
         public ViewHolder(View itemView) {
             super(itemView);
 
             imagen= (ImageView) itemView.findViewById(R.id.imgConjunto);
             titulo= (TextView) itemView.findViewById(R.id.txtTituloConjunto);
             descripcion= (TextView) itemView.findViewById(R.id.txtDescripcion);
+            btnMeGusta= (ImageButton) itemView.findViewById(R.id.imgMeGusta);
+
+            votado=false;
+
         }
+
+
     }
 }

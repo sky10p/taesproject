@@ -13,14 +13,29 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:orientation="vertical">
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="190dp"
-    android:scaleType="centerCrop"
-    android:id="@+id/imgConjunto"
-    android:contentDescription="@string/contentimg" />
 
-<TextView
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/imgConjunto"
+        android:contentDescription="@string/contentimg" />
+
+           <ImageButton
+               android:layout_width="100dp"
+               android:layout_height="100dp"
+               android:id="@+id/imgMeGusta"
+               android:layout_alignParentTop="true"
+               android:layout_alignParentRight="true"
+               android:layout_alignParentEnd="true"
+               android:background="#88ffffff" />
+       </RelativeLayout>
+
+       <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/txtTituloConjunto"
@@ -33,5 +48,6 @@
            android:layout_height="wrap_content"
            android:id="@+id/txtDescripcion"
            android:text="descripcion"/>
+
    </LinearLayout>
 </android.support.v7.widget.CardView>
