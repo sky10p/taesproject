@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -51,6 +52,7 @@ public class AmigosAdapter  extends RecyclerView.Adapter<AmigosAdapter.ViewHolde
             amigos.get(position).fetchIfNeeded();
             holder.amigo.setText(amigos.get(position).getUsername());
             TextDrawable imgAmigo=TextDrawable.builder().buildRound(TextUtils.getLettersFromUser(amigos.get(position).getUsername()), ColorUtils.ColorGenerator.MATERIAL.getColor(amigos.get(position)));
+
             holder.imgAmigo.setImageDrawable(imgAmigo);
             holder.btnDejarDeSeguir.setOnClickListener(new View.OnClickListener() {
                 @Override
