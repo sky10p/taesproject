@@ -85,7 +85,7 @@ public class PublicacionesFragment extends Fragment {
                     ;
 
                     AdapterConjunto.ConjuntoRopa conjunto = new AdapterConjunto.ConjuntoRopa(parseObject.getString("titulo"),
-                            parseObject.getString("texto"), parseObject.getParseFile("foto").getUrl(),random.nextInt(30));
+                            parseObject.getString("texto"), parseObject.getParseFile("foto").getUrl(),0);
                     conjuntos.add(conjunto);
 
 
