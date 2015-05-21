@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseObject;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -46,23 +47,20 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
         public String titulo;
         public String descripcion;
         public String url;
+        public String id;
         public int votos;
 
 
 
-        public ConjuntoRopa(String titulo, String descripcion, String url){
-            this.titulo=titulo;
-            this.descripcion=descripcion;
-            this.url=url;
-            this.votos=0;
-        }
-
-        public ConjuntoRopa(String titulo, String descripcion, String url, int votos){
+        public ConjuntoRopa(String objectId, String titulo, String descripcion, String url, int votos){
+            this.id=objectId;
             this.titulo=titulo;
             this.descripcion=descripcion;
             this.url=url;
             this.votos=votos;
         }
+
+
 
         public String getVotos(){
             return String.valueOf(votos);
@@ -132,7 +130,10 @@ public class AdapterConjunto extends RecyclerView.Adapter<AdapterConjunto.ViewHo
                     conjunto.get(position).votos++;
                     holder.votado=true;
                     Picasso.with(context).load(R.drawable.me_gusta).resize(300, 300).transform(new TransformationVotos(context, conjunto.get(position).getVotos())).into(holder.btnMeGusta);
-
+                    ParseObject parseObject=new ParseObject("Publicacion");
+                    parseObject.setObjectId(conjunto.get(position).id);
+                    parseObject.put("votos",conjunto.get(position).votos);
+                    parseObject.saveInBackground();
                 }else {
                     Toast.makeText(context,"Ya ha votado",Toast.LENGTH_LONG).show();
                 }

@@ -82,10 +82,12 @@ public class PublicacionesFragment extends Fragment {
                 ArrayList<AdapterConjunto.ConjuntoRopa> conjuntos = new ArrayList<>();
                 Random random=new Random();
                 for (ParseObject parseObject : list) {
-                    ;
 
-                    AdapterConjunto.ConjuntoRopa conjunto = new AdapterConjunto.ConjuntoRopa(parseObject.getString("titulo"),
-                            parseObject.getString("texto"), parseObject.getParseFile("foto").getUrl(),0);
+                    int votos;
+                    votos=parseObject.getInt("votos");
+
+                    AdapterConjunto.ConjuntoRopa conjunto = new AdapterConjunto.ConjuntoRopa(parseObject.getObjectId(),parseObject.getString("titulo"),
+                            parseObject.getString("texto"), parseObject.getParseFile("foto").getUrl(),votos);
                     conjuntos.add(conjunto);
 
 
