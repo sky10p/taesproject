@@ -3,12 +3,11 @@ package taes.project.dressyourself.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,13 +16,11 @@ import android.view.MenuItem;
 import com.parse.ParseUser;
 
 import taes.project.dressyourself.R;
-import taes.project.dressyourself.adapter.AdapterDrawerNavigation;
 import taes.project.dressyourself.fragments.AmigosFragment;
 import taes.project.dressyourself.fragments.CategoriasFragment;
 import taes.project.dressyourself.fragments.FloatingButtonFragment;
 import taes.project.dressyourself.fragments.PublicacionesFragment;
 import taes.project.dressyourself.interfaces.OnBackPressedListener;
-import taes.project.dressyourself.interfaces.OnDrawerLayoutMenuListener;
 
 
 public class DressYourSelfActivity extends AppCompatActivity {
@@ -32,10 +29,11 @@ public class DressYourSelfActivity extends AppCompatActivity {
     public DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawer;
     private PublicacionesFragment publicacionesFragment;
-    private RecyclerView listaDrawer;
+
     public FloatingButtonFragment floatingButton;
 
     private OnBackPressedListener onBackPressedListener;
+    private NavigationView drawer;
 
     public void setOnBackPressedListener(OnBackPressedListener listener) {
         this.onBackPressedListener = listener;
@@ -67,45 +65,44 @@ public class DressYourSelfActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(R.mipmap.ic_dress_your_self_circle);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        listaDrawer= (RecyclerView) findViewById(R.id.left_drawer);
-        listaDrawer.setLayoutManager(new LinearLayoutManager(this));
+        drawer = (NavigationView) findViewById(R.id.drawer);
 
 
-        AdapterDrawerNavigation adapter=new AdapterDrawerNavigation(this);
 
-        adapter.setOnDrawerLayoutMenuListener(new OnDrawerLayoutMenuListener() {
+       
+        drawer.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClicArmario() {
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new CategoriasFragment()).addToBackStack(null).commit();
-                drawerLayout.closeDrawers();
-            }
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                int id=menuItem.getItemId();
+                switch (id){
+                    case R.id.drawer_armario:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new CategoriasFragment()).addToBackStack(null).commit();
+                        drawerLayout.closeDrawers();
+                        break;
+                    case R.id.drawer_amigos:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AmigosFragment()).addToBackStack(null).commit();
+                        drawerLayout.closeDrawers();
+                        break;
+                    case R.id.drawer_ajustes:
+                        break;
+                    case R.id.drawer_ayuda:
+                        break;
+                    case R.id.drawer_sign_out:
+                        ParseUser.logOut();
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
 
-            @Override
-            public void onClicAmigos() {
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AmigosFragment()).addToBackStack(null).commit();
-                drawerLayout.closeDrawers();
-            }
-
-            @Override
-            public void onClicAjustes() {
-
-            }
-
-            @Override
-            public void onClicAyuda() {
-
-            }
-
-            @Override
-            public void onClicCerrarSesion() {
-                ParseUser.logOut();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
+                }
+                return true;
             }
         });
 
-        listaDrawer.setAdapter(adapter);
+
+
+
+
         publicacionesFragment =new PublicacionesFragment();
 
         setSupportActionBar(toolbar);
