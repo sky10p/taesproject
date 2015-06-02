@@ -55,4 +55,11 @@
     <string name="sure_delete_friend">¿Estás seguro que quieres borrarlo?</string>
     <string name="friends">Amigos</string>
 
+    <string name="armario">Armario</string>
+    <string name="amigos">Amigos</string>
+    <string name="divider">divider</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="ayuda">Ayuda</string>
+    <string name="sign_out">Cerrar Sesión</string>
+
 </resources>
